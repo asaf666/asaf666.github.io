@@ -1,0 +1,547 @@
+<!-- Asaf — QA & Cybersecurity portfolio. Single self-contained file. -->
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Asaf — Senior QA Engineer · Cybersecurity</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Chakra+Petch:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans:wght@400;500;600&display=swap" rel="stylesheet" />
+<style>
+  :root{
+    --bg:#0A0E14;
+    --bg-2:#0E141C;
+    --panel:#111A24;
+    --panel-2:#15202C;
+    --line:rgba(125,148,168,0.14);
+    --line-strong:rgba(125,148,168,0.28);
+    --text:#E8EEF4;
+    --muted:#8696A7;
+    --muted-2:#5E6E7E;
+    --accent:#3FE0C9;
+    --accent-dim:rgba(63,224,201,0.12);
+    --accent-line:rgba(63,224,201,0.35);
+    --amber:#FFC247;
+    --violet:#7C6FF0;
+    --display:'Chakra Petch',sans-serif;
+    --body:'IBM Plex Sans',system-ui,sans-serif;
+    --mono:'IBM Plex Mono',ui-monospace,monospace;
+    --maxw:1080px;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html{scroll-behavior:smooth}
+  body{
+    background:var(--bg);
+    color:var(--text);
+    font-family:var(--body);
+    font-size:16px;
+    line-height:1.6;
+    -webkit-font-smoothing:antialiased;
+    overflow-x:hidden;
+  }
+  /* ambient grid + sweep */
+  body::before{
+    content:"";position:fixed;inset:0;z-index:0;pointer-events:none;
+    background-image:
+      linear-gradient(var(--line) 1px,transparent 1px),
+      linear-gradient(90deg,var(--line) 1px,transparent 1px);
+    background-size:64px 64px;
+    mask-image:radial-gradient(ellipse 80% 60% at 50% 0%,#000 30%,transparent 80%);
+    opacity:.5;
+  }
+  a{color:inherit;text-decoration:none}
+  ::selection{background:var(--accent-dim);color:var(--text)}
+  :focus-visible{outline:2px solid var(--accent);outline-offset:3px;border-radius:2px}
+
+  .wrap{max-width:var(--maxw);margin:0 auto;padding:0 28px;position:relative;z-index:1}
+  .mono{font-family:var(--mono)}
+  .eyebrow{
+    font-family:var(--mono);font-size:11px;letter-spacing:.22em;text-transform:uppercase;
+    color:var(--accent);display:inline-flex;align-items:center;gap:9px;
+  }
+  .eyebrow::before{content:"";width:18px;height:1px;background:var(--accent-line)}
+
+  /* ---------- top status bar ---------- */
+  .topbar{
+    position:sticky;top:0;z-index:50;
+    backdrop-filter:blur(10px);
+    background:linear-gradient(180deg,rgba(10,14,20,.9),rgba(10,14,20,.55));
+    border-bottom:1px solid var(--line);
+  }
+  .topbar .row{display:flex;align-items:center;justify-content:space-between;height:56px}
+  .mark{font-family:var(--display);font-weight:700;letter-spacing:.04em;font-size:15px}
+  .mark .dot{color:var(--accent)}
+  .status{font-family:var(--mono);font-size:11px;color:var(--muted);display:flex;align-items:center;gap:8px}
+  .pulse{width:7px;height:7px;border-radius:50%;background:var(--accent);box-shadow:0 0 0 0 var(--accent-line);animation:pulse 2.4s infinite}
+  @keyframes pulse{0%{box-shadow:0 0 0 0 rgba(63,224,201,.5)}70%{box-shadow:0 0 0 7px rgba(63,224,201,0)}100%{box-shadow:0 0 0 0 rgba(63,224,201,0)}}
+  .nav{display:flex;gap:26px;font-family:var(--mono);font-size:12px;color:var(--muted)}
+  .nav a{transition:color .2s}
+  .nav a:hover{color:var(--text)}
+  @media(max-width:720px){.nav{display:none}}
+
+  /* ---------- hero ---------- */
+  .hero{padding:96px 0 72px;position:relative}
+  .hero .scanline{
+    position:absolute;left:0;right:0;top:0;height:2px;
+    background:linear-gradient(90deg,transparent,var(--accent),transparent);
+    opacity:.0;
+  }
+  .booting .hero .scanline{animation:sweep 1.6s ease-out forwards}
+  @keyframes sweep{0%{top:0;opacity:.9}100%{top:100%;opacity:0}}
+
+  .boot{
+    font-family:var(--mono);font-size:12.5px;color:var(--muted);
+    min-height:120px;margin-bottom:30px;
+  }
+  .boot .ln{opacity:0;display:block;white-space:pre-wrap}
+  .boot .ok{color:var(--accent)}
+  .boot .cur::after{content:"▋";color:var(--accent);animation:blink 1s steps(2) infinite}
+  @keyframes blink{50%{opacity:0}}
+
+  .hero h1{
+    font-family:var(--display);font-weight:700;line-height:1.02;
+    font-size:clamp(44px,8vw,86px);letter-spacing:-.01em;margin-bottom:18px;
+  }
+  .hero h1 .sub{display:block;font-size:clamp(15px,2.4vw,21px);font-weight:500;color:var(--accent);letter-spacing:.18em;text-transform:uppercase;font-family:var(--mono);margin-top:18px}
+  .hero h1.name{cursor:pointer}
+  .hero h1 .nm{display:inline-block}
+  .name .sur{color:var(--text);transition:color .3s}
+  .name:hover .sur,.name:focus-visible .sur{color:var(--accent)}
+  .nm.scrambling{animation:glitch .26s steps(2,end) infinite}
+  @keyframes glitch{
+    0%{text-shadow:2px 0 var(--accent),-2px 0 var(--violet);transform:translate(0,0)}
+    50%{text-shadow:-2px 0 var(--accent),2px 0 var(--violet);transform:translate(1px,-1px)}
+    100%{text-shadow:1px 0 var(--violet),-1px 0 var(--accent);transform:translate(-1px,1px)}
+  }
+  .lede{max-width:620px;color:var(--muted);font-size:clamp(16px,2vw,18px);margin-top:8px}
+  .lede strong{color:var(--text);font-weight:600}
+  .cta-row{display:flex;flex-wrap:wrap;gap:14px;margin-top:34px}
+  .btn{
+    font-family:var(--mono);font-size:13px;letter-spacing:.04em;
+    padding:13px 22px;border:1px solid var(--line-strong);border-radius:6px;
+    color:var(--text);transition:.2s;display:inline-flex;align-items:center;gap:10px;
+  }
+  .btn:hover{border-color:var(--accent-line);background:var(--accent-dim)}
+  .btn.primary{background:var(--accent);color:#06120F;border-color:var(--accent);font-weight:500}
+  .btn.primary:hover{filter:brightness(1.08)}
+
+  /* readouts strip */
+  .readout{display:grid;grid-template-columns:repeat(4,1fr);gap:1px;background:var(--line);border:1px solid var(--line);border-radius:8px;overflow:hidden;margin-top:54px}
+  .readout div{background:var(--bg-2);padding:18px 20px}
+  .readout .k{font-family:var(--display);font-weight:700;font-size:26px;color:var(--text)}
+  .readout .l{font-family:var(--mono);font-size:11px;color:var(--muted);letter-spacing:.08em;margin-top:4px}
+  @media(max-width:720px){.readout{grid-template-columns:repeat(2,1fr)}}
+
+  /* ---------- section frame ---------- */
+  section{padding:84px 0;position:relative}
+  .sec-head{display:flex;align-items:baseline;gap:18px;margin-bottom:40px;flex-wrap:wrap}
+  .sec-head h2{font-family:var(--display);font-weight:600;font-size:clamp(26px,4vw,38px);letter-spacing:-.01em}
+  .sec-id{font-family:var(--mono);font-size:12px;color:var(--muted-2);margin-left:auto}
+
+  .prose{max-width:680px;color:var(--muted);font-size:17px}
+  .prose strong{color:var(--text);font-weight:600}
+  .prose p+p{margin-top:18px}
+
+  /* ---------- capabilities ---------- */
+  .caps{display:grid;grid-template-columns:repeat(2,1fr);gap:20px}
+  @media(max-width:720px){.caps{grid-template-columns:1fr}}
+  .cap{border:1px solid var(--line);border-radius:10px;padding:24px;background:linear-gradient(180deg,var(--panel),var(--bg-2))}
+  .cap h3{font-family:var(--display);font-weight:600;font-size:16px;letter-spacing:.02em;margin-bottom:14px;display:flex;align-items:center;gap:10px}
+  .cap h3 .ix{font-family:var(--mono);font-size:11px;color:var(--accent)}
+  .tags{display:flex;flex-wrap:wrap;gap:8px}
+  .tag{font-family:var(--mono);font-size:12px;color:var(--muted);border:1px solid var(--line);border-radius:5px;padding:5px 10px;background:var(--bg);transition:.18s}
+  .cap:hover .tag{border-color:var(--line-strong)}
+
+  /* ---------- projects (monitors) ---------- */
+  .monitors{display:grid;gap:18px}
+  .mon{
+    border:1px solid var(--line);border-radius:12px;background:var(--panel);
+    padding:26px;transition:.22s;position:relative;overflow:hidden;
+  }
+  .mon::after{content:"";position:absolute;left:0;top:0;bottom:0;width:3px;background:var(--accent);opacity:.0;transition:.22s}
+  .mon:hover{border-color:var(--line-strong);transform:translateY(-2px)}
+  .mon:hover::after{opacity:1}
+  .mon-top{display:flex;align-items:center;gap:14px;margin-bottom:16px;flex-wrap:wrap}
+  .mon-top h3{font-family:var(--display);font-weight:600;font-size:21px}
+  .badge{font-family:var(--mono);font-size:10.5px;letter-spacing:.1em;text-transform:uppercase;padding:4px 9px;border-radius:20px;display:inline-flex;align-items:center;gap:7px;border:1px solid var(--line-strong)}
+  .badge .d{width:6px;height:6px;border-radius:50%}
+  .badge.live{color:var(--accent)}.badge.live .d{background:var(--accent);box-shadow:0 0 6px var(--accent)}
+  .badge.dev{color:var(--amber)}.badge.dev .d{background:var(--amber);box-shadow:0 0 6px var(--amber)}
+  .mon .role{font-family:var(--mono);font-size:11px;color:var(--muted-2);margin-left:auto}
+  .mon p{color:var(--muted);font-size:15.5px;max-width:760px}
+  .mon .meta{display:flex;flex-wrap:wrap;gap:7px;margin-top:18px}
+  .mon .meta .tag{font-size:11px}
+
+  /* ---------- experience timeline ---------- */
+  .tl{position:relative;padding-left:26px}
+  .tl::before{content:"";position:absolute;left:5px;top:6px;bottom:6px;width:1px;background:var(--line-strong)}
+  .job{position:relative;padding:0 0 34px}
+  .job:last-child{padding-bottom:0}
+  .job::before{content:"";position:absolute;left:-24px;top:6px;width:11px;height:11px;border-radius:50%;background:var(--bg);border:2px solid var(--accent)}
+  .job .when{font-family:var(--mono);font-size:11.5px;color:var(--accent);letter-spacing:.05em}
+  .job h3{font-family:var(--display);font-weight:600;font-size:18px;margin:4px 0 2px}
+  .job .co{font-family:var(--mono);font-size:13px;color:var(--muted)}
+  .job p{color:var(--muted);font-size:15px;margin-top:8px;max-width:680px}
+
+  /* ---------- contact ---------- */
+  .contact{border:1px solid var(--line);border-radius:14px;background:linear-gradient(160deg,var(--panel-2),var(--bg-2));padding:48px;text-align:center;position:relative;overflow:hidden}
+  .contact::before{content:"";position:absolute;inset:0;background:radial-gradient(circle at 50% -20%,var(--accent-dim),transparent 60%)}
+  .contact h2{font-family:var(--display);font-weight:700;font-size:clamp(26px,4vw,40px);position:relative}
+  .contact p{color:var(--muted);max-width:480px;margin:14px auto 30px;position:relative}
+  .links{display:flex;justify-content:center;gap:14px;flex-wrap:wrap;position:relative}
+
+  footer{border-top:1px solid var(--line);padding:30px 0;margin-top:40px}
+  footer .row{display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:12px;font-family:var(--mono);font-size:11.5px;color:var(--muted-2)}
+
+  @media(prefers-reduced-motion:reduce){
+    *{animation:none!important;transition:none!important;scroll-behavior:auto!important}
+    .boot .ln{opacity:1!important}
+  }
+</style>
+</head>
+<body class="booting">
+
+  <!-- ===== top status bar ===== -->
+  <header class="topbar">
+    <div class="wrap row">
+      <div class="mark">ASAF<span class="dot">.</span>QA</div>
+      <nav class="nav">
+        <a href="#profile">profile</a>
+        <a href="#capabilities">capabilities</a>
+        <a href="#projects">projects</a>
+        <a href="#experience">experience</a>
+        <a href="#contact">contact</a>
+      </nav>
+      <div class="status"><span class="pulse"></span><span id="clock">AVAILABLE</span></div>
+    </div>
+  </header>
+
+  <!-- ===== hero ===== -->
+  <section class="hero" id="top">
+    <span class="scanline"></span>
+    <div class="wrap">
+      <div class="boot mono" id="boot" aria-hidden="true"></div>
+
+      <h1 class="name" id="name" tabindex="0">
+        <span class="nm">Asaf</span> <span class="nm sur" id="surname">Sade</span>
+        <span class="sub">Senior QA Engineer · Cybersecurity</span>
+      </h1>
+      <p class="lede">Twenty years of breaking systems on purpose. I build and lead <strong>test automation</strong> for security products — identity protection, honeypots, PKI/VPN, firewall management, and DLP — where a missed defect isn't a bug, it's an exposure.</p>
+
+      <div class="cta-row">
+        <a class="btn primary" href="#projects">View projects →</a>
+        <a class="btn" href="#contact">Get in touch</a>
+        <a class="btn" href="Asaf_Sade_QA_Resume_2026.pdf" id="cvlink" download>Download CV</a>
+      </div>
+
+      <div class="readout">
+        <div><div class="k">20+</div><div class="l">YEARS IN QA</div></div>
+        <div><div class="k">5+</div><div class="l">SECURITY DOMAINS</div></div>
+        <div><div class="k">700+</div><div class="l">FIREWALL RULES AUDITED</div></div>
+        <div><div class="k">∞</div><div class="l">EDGE CASES FOUND</div></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== profile ===== -->
+  <section id="profile">
+    <div class="wrap">
+      <div class="sec-head">
+        <span class="eyebrow">01</span>
+        <h2>Profile</h2>
+        <span class="sec-id mono">// who_is_this.md</span>
+      </div>
+      <div class="prose">
+        <p>I'm a Senior QA Engineer who has spent two decades in one of the least forgiving corners of software: <strong>cybersecurity</strong>. My work spans identity protection, deception (honeypots), VPN/PKI, firewall management, and data loss prevention — across Linux and Windows endpoints, containers, cloud, and enterprise networking.</p>
+        <p>I've led automation engineers as a Tech Lead and I treat quality as an engineering discipline, not a gate at the end. My differentiator is <strong>domain depth</strong>: I understand the products I test as a security practitioner would, which means I find the failures that matter, not just the ones that are easy to reach.</p>
+        <p>In my own time I build automation and security tooling for the pleasure of it — a personal trading agent, network and firewall utilities, LLM-driven assistants. The instinct to instrument, monitor, and verify doesn't switch off.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== capabilities ===== -->
+  <section id="capabilities">
+    <div class="wrap">
+      <div class="sec-head">
+        <span class="eyebrow">02</span>
+        <h2>Capabilities</h2>
+        <span class="sec-id mono">// stack &amp; domains</span>
+      </div>
+      <div class="caps">
+        <div class="cap">
+          <h3><span class="ix">A</span>Security Domains</h3>
+          <div class="tags">
+            <span class="tag">Identity Protection</span>
+            <span class="tag">Honeypots / Deception</span>
+            <span class="tag">VPN / PKI</span>
+            <span class="tag">Firewall Management</span>
+            <span class="tag">DLP</span>
+          </div>
+        </div>
+        <div class="cap">
+          <h3><span class="ix">B</span>Test Automation</h3>
+          <div class="tags">
+            <span class="tag">Playwright</span>
+            <span class="tag">TestRail</span>
+            <span class="tag">Jira</span>
+            <span class="tag">AI-assisted testing</span>
+            <span class="tag">CI / regression</span>
+          </div>
+        </div>
+        <div class="cap">
+          <h3><span class="ix">C</span>Platforms &amp; Infra</h3>
+          <div class="tags">
+            <span class="tag">Linux</span>
+            <span class="tag">Windows / WSL2</span>
+            <span class="tag">Docker / Podman</span>
+            <span class="tag">AWS</span>
+            <span class="tag">PostgreSQL</span>
+            <span class="tag">Enterprise networking</span>
+          </div>
+        </div>
+        <div class="cap">
+          <h3><span class="ix">D</span>Leadership</h3>
+          <div class="tags">
+            <span class="tag">Tech Lead</span>
+            <span class="tag">Mentoring automation engineers</span>
+            <span class="tag">Test strategy</span>
+            <span class="tag">Quality ownership</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== projects ===== -->
+  <section id="projects">
+    <div class="wrap">
+      <div class="sec-head">
+        <span class="eyebrow">03</span>
+        <h2>Projects</h2>
+        <span class="sec-id mono">// personal builds · monitored</span>
+      </div>
+      <div class="monitors">
+
+        <article class="mon">
+          <div class="mon-top">
+            <h3>Smart Trading Agent</h3>
+            <span class="badge live"><span class="d"></span>Paper trading</span>
+            <span class="role">quant research · Python</span>
+          </div>
+          <p>A disciplined, rules-based research agent for US equities that scans, scores, and paper-trades while narrating its reasoning in plain English. A professional exit engine — break-even, partial scale-out, Chandelier trailing stop — sits behind a risk manager that acts as the sole hard gate, so capital preservation always comes first. Across a 5-year full-cycle backtest it beats SPY on a risk-adjusted basis (Sharpe 1.05 vs 0.86) with roughly 40% less drawdown, learns from its own realized trades, and can layer in walk-forward-validated ML signal weights and an LLM news analyst.</p>
+          <div class="meta">
+            <span class="tag">Python</span><span class="tag">pandas / numpy</span><span class="tag">backtesting</span><span class="tag">risk management</span><span class="tag">ML · logistic</span><span class="tag">LLM sentiment</span><span class="tag">pytest</span>
+          </div>
+        </article>
+
+        <article class="mon">
+          <div class="mon-top">
+            <h3>Financial Compass</h3>
+            <span class="badge live"><span class="d"></span>Live</span>
+            <span class="role">stock research · Streamlit</span>
+          </div>
+          <p>A multi-market stock-research dashboard for US and Israeli (TASE) equities, built in Streamlit. It pulls live prices and fundamentals, computes a multi-factor composite score per stock, and layers on a news, sentiment, and macro-risk overlay drawn from both English and Hebrew sources — with full Hebrew display for Israeli names, interactive candlestick charts, optional Gemini AI analysis, and a disk-cached two-stage pre-screen so a ~200-name universe loads fast. Built for research and idea-filtering, explicitly not financial advice.</p>
+          <div class="meta">
+            <span class="tag">Python</span><span class="tag">Streamlit</span><span class="tag">Plotly</span><span class="tag">yfinance</span><span class="tag">Gemini AI</span><span class="tag">news / sentiment</span><span class="tag">Hebrew + English</span>
+          </div>
+        </article>
+
+        <article class="mon">
+          <div class="mon-top">
+            <h3>Hermes</h3>
+            <span class="badge live"><span class="d"></span>Running</span>
+            <span class="role">LLM agent · Telegram</span>
+          </div>
+          <p>A personal Telegram assistant bot wired to an LLM backend, running persistently on WSL2 via the Nous Hermes agent. Routes through OpenRouter (Gemini 2.5 Flash) and survives reboots through Task Scheduler — built to be a reliable, always-on personal interface rather than a weekend demo.</p>
+          <div class="meta">
+            <span class="tag">Python</span><span class="tag">WSL2</span><span class="tag">OpenRouter</span><span class="tag">LLM</span><span class="tag">persistence</span>
+          </div>
+        </article>
+
+        <article class="mon">
+          <div class="mon-top">
+            <h3>NetLens</h3>
+            <span class="badge dev"><span class="d"></span>In development</span>
+            <span class="role">security tooling · concept</span>
+          </div>
+          <p>An autonomous, per-process network traffic investigator. NetLens watches what each process is talking to, uses LLM-based reasoning to explain <em>why</em> a connection looks suspicious in plain language, and offers cautious one-click blocking — turning raw network telemetry into a decision a human can actually make.</p>
+          <div class="meta">
+            <span class="tag">network analysis</span><span class="tag">LLM reasoning</span><span class="tag">endpoint security</span>
+          </div>
+        </article>
+
+        <article class="mon">
+          <div class="mon-top">
+            <h3>Firewall Audit Toolkit</h3>
+            <span class="badge live"><span class="d"></span>Shipped</span>
+            <span class="role">automation · Windows</span>
+          </div>
+          <p>Scripts that audited 700+ Windows Firewall rules — surfacing disabled rules, duplicates, and orphaned UWP entries — then cleaned them up safely with backup-before-delete logic. A practical answer to firewall sprawl that nobody wants to untangle by hand.</p>
+          <div class="meta">
+            <span class="tag">PowerShell</span><span class="tag">Windows Firewall</span><span class="tag">automation</span>
+          </div>
+        </article>
+
+        <article class="mon">
+          <div class="mon-top">
+            <h3>Inbox Automation</h3>
+            <span class="badge live"><span class="d"></span>Running</span>
+            <span class="role">Google Apps Script</span>
+          </div>
+          <p>A set of Gmail automations built on Google Apps Script that parse, classify, and auto-label email by content and age — keeping a noisy inbox organized without manual triage. A small example of the same instinct that drives my QA work: automate the repetitive, surface the signal.</p>
+          <div class="meta">
+            <span class="tag">Apps Script</span><span class="tag">Gmail API</span><span class="tag">text parsing</span>
+          </div>
+        </article>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== experience ===== -->
+  <section id="experience">
+    <div class="wrap">
+      <div class="sec-head">
+        <span class="eyebrow">04</span>
+        <h2>Experience</h2>
+        <span class="sec-id mono">// career.log</span>
+      </div>
+      <div class="tl">
+        <div class="job">
+          <div class="when">RECENT</div>
+          <h3>Senior QA Engineer</h3>
+          <div class="co">Proofpoint · Illusive</div>
+          <p>Quality ownership for identity-protection and deception (honeypot) security products — building and running automation across complex endpoint and network scenarios.</p>
+        </div>
+        <div class="job">
+          <div class="when">PRIOR</div>
+          <h3>Senior QA Engineer · Tech Lead</h3>
+          <div class="co">AlgoSec</div>
+          <p>Led a team of automation engineers as Tech Lead while owning QA for enterprise firewall and security-policy management — the domain that still shapes how I think about network rules and exposure.</p>
+        </div>
+        <div class="job">
+          <div class="when">EARLIER</div>
+          <h3>QA Engineer</h3>
+          <div class="co">SafeNet · Aladdin</div>
+          <p>Quality work across PKI, VPN, and authentication products — the foundation of a career spent entirely inside security.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== contact ===== -->
+  <section id="contact">
+    <div class="wrap">
+      <div class="contact">
+        <h2>Let's talk quality.</h2>
+        <p>Open to senior QA automation roles. If you're building security products and want someone who understands both the test and the threat — reach out.</p>
+        <div class="links">
+          <a class="btn primary" href="mailto:sadeasaf@gmail.com">Email me</a>
+          <a class="btn" href="https://www.linkedin.com/in/asaf666/" target="_blank" rel="noopener">LinkedIn</a>
+          <a class="btn" href="https://github.com/asaf666" target="_blank" rel="noopener">GitHub</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <div class="wrap row">
+      <span>© <span id="yr"></span> Asaf — Senior QA Engineer</span>
+      <span>BUILT WITH PRECISION · NO TEMPLATES</span>
+    </div>
+  </footer>
+
+<script>
+  document.getElementById('yr').textContent = new Date().getFullYear();
+
+  // boot / verification sequence in the hero
+  (function(){
+    var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    var el = document.getElementById('boot');
+    var lines = [
+      ['> init verification sequence …', ''],
+      ['  experience .......... ', '20+ years [OK]'],
+      ['  domain: cybersecurity ', '[VALIDATED]'],
+      ['  automation .......... ', '[ACTIVE]'],
+      ['> profile loaded. status: ', 'AVAILABLE FOR HIRE'],
+    ];
+    if(reduce){
+      el.innerHTML = lines.map(function(l){
+        return '<span class="ln" style="opacity:1">'+l[0]+'<span class="ok">'+l[1]+'</span></span>';
+      }).join('');
+      document.body.classList.remove('booting');
+      return;
+    }
+    var i=0;
+    function next(){
+      if(i>=lines.length){
+        document.body.classList.remove('booting');
+        return;
+      }
+      var span=document.createElement('span');
+      span.className='ln cur';
+      span.innerHTML=lines[i][0]+'<span class="ok">'+lines[i][1]+'</span>';
+      span.style.transition='opacity .25s';
+      el.appendChild(span);
+      requestAnimationFrame(function(){span.style.opacity=1;});
+      var prev=el.querySelectorAll('.ln');
+      if(prev.length>1) prev[prev.length-2].classList.remove('cur');
+      i++;
+      setTimeout(next, 360);
+    }
+    setTimeout(next, 250);
+  })();
+
+  // name decode-on-hover ("phase out" → resolve to the real surname)
+  (function(){
+    var REAL_SURNAME = "Sade";
+    var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    var nameEl = document.getElementById('name');
+    var sur = document.getElementById('surname');
+    if(!nameEl || !sur) return;
+    var first = nameEl.querySelector('.nm:not(.sur)');
+    var glyphs = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789#%&$/\\<>*+=?";
+
+    function scramble(el, target){
+      if(!el) return;
+      target = (target == null) ? el.textContent : target;
+      if(el._iv){ clearInterval(el._iv); el._iv = null; }   // restart cleanly if re-hovered
+      if(!reduce) el.classList.add('scrambling');            // glitch shimmer (off for reduced motion)
+      var hold = reduce ? 1 : 2;                             // ticks each char churns before locking
+      var tick = reduce ? 45 : 34;
+      var frame = 0, settle = target.length * hold + 6;
+      el._iv = setInterval(function(){
+        var out = "";
+        for(var i = 0; i < target.length; i++){
+          out += (i < frame / hold)
+            ? target.charAt(i)
+            : glyphs.charAt(Math.floor(Math.random() * glyphs.length));
+        }
+        el.textContent = out;
+        if(++frame > settle){
+          clearInterval(el._iv); el._iv = null;
+          el.textContent = target;
+          el.classList.remove('scrambling');
+        }
+      }, tick);
+    }
+
+    function run(){
+      scramble(first, 'Asaf');
+      scramble(sur, REAL_SURNAME === "____" ? "[Surname]" : REAL_SURNAME);
+    }
+    nameEl.addEventListener('mouseenter', run);
+    nameEl.addEventListener('focus', run);
+  })();
+
+  // subtle clock toggle in status bar
+  (function(){
+    var c=document.getElementById('clock'), on=true;
+    setInterval(function(){
+      on=!on;
+      c.textContent = on ? 'AVAILABLE' : new Date().toLocaleTimeString('en-GB');
+    }, 3500);
+  })();
+</script>
+</body>
+</html>
