@@ -167,6 +167,17 @@
   .badge .d{width:6px;height:6px;border-radius:50%}
   .badge.live{color:var(--accent)}.badge.live .d{background:var(--accent);box-shadow:0 0 6px var(--accent)}
   .badge.dev{color:var(--amber)}.badge.dev .d{background:var(--amber);box-shadow:0 0 6px var(--amber)}
+  .badge.play{color:var(--accent);text-decoration:none;transition:.2s;cursor:pointer}
+  .badge.play .d{background:var(--accent);box-shadow:0 0 6px var(--accent)}
+  .badge.play:hover{background:var(--accent-dim);border-color:var(--accent-line)}
+  .apptitle{display:flex;align-items:center;gap:11px}
+  .appicon{display:inline-flex;line-height:0;transition:.22s}
+  .appicon img{display:block;width:36px;height:36px;border-radius:7px}
+  .appicon:hover{transform:translateY(-1px);filter:drop-shadow(0 0 9px rgba(63,224,201,.55))}
+  .translit{font-family:var(--mono);font-size:12px;font-weight:400;color:var(--muted-2);letter-spacing:.06em}
+  .appname{transition:color .2s}
+  .appname:hover{color:var(--accent)}
+  .apptitle [lang="he"]{unicode-bidi:isolate;font-family:var(--body);font-weight:600}
   .mon .role{font-family:var(--mono);font-size:11px;color:var(--muted-2);margin-left:auto}
   .mon p{color:var(--muted);font-size:15.5px;max-width:760px}
   .mon .meta{display:flex;flex-wrap:wrap;gap:7px;margin-top:18px}
@@ -322,6 +333,37 @@
       </div>
       <div class="monitors">
 
+
+        <article class="mon">
+          <div class="mon-top">
+            <h3 class="apptitle">
+              <a class="appicon" href="https://play.google.com/store/apps/details?id=com.memolistener.app" target="_blank" rel="noopener" aria-label="Open KolMelel on Google Play">
+                <img src="data:image/png;base64,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" alt="KolMelel app icon" width="34" height="34" />
+              </a>
+              <a class="appname" href="https://play.google.com/store/apps/details?id=com.memolistener.app" target="_blank" rel="noopener"><span lang="he" dir="rtl">&#1511;&#1493;&#1500;&#1502;&#1500;&#1500;</span></a>
+              <span class="translit">KolMelel</span>
+            </h3>
+            <a class="badge play" href="https://play.google.com/store/apps/details?id=com.memolistener.app" target="_blank" rel="noopener"><span class="d"></span>Live on Google Play</a>
+            <span class="role">Android · Kotlin</span>
+          </div>
+          <p>An on-device Hebrew voice-memo and transcription app for Android, built in Kotlin around the platform's speech engine with a strong privacy stance — no cloud, no off-device backup. Developed with a comprehensive automated test suite.</p>
+          <div class="meta">
+            <span class="tag">Kotlin</span><span class="tag">Android</span><span class="tag">speech-to-text</span><span class="tag">on-device</span><span class="tag">tested</span>
+          </div>
+        </article>
+
+        <article class="mon">
+          <div class="mon-top">
+            <h3>FindMyStuff</h3>
+            <span class="badge dev"><span class="d"></span>Beta · v1.3</span>
+            <span class="role">Android · Kotlin</span>
+          </div>
+          <p>A privacy-first Android app for indexing and searching your own documents and images entirely on-device. Built in Kotlin with on-device OCR and a local full-text search index — no data ever leaves the phone.</p>
+          <div class="meta">
+            <span class="tag">Kotlin</span><span class="tag">Android</span><span class="tag">ML Kit OCR</span><span class="tag">Room FTS</span><span class="tag">on-device</span>
+          </div>
+        </article>
+
         <article class="mon">
           <div class="mon-top">
             <h3>Smart Trading Agent</h3>
@@ -348,42 +390,6 @@
 
         <article class="mon">
           <div class="mon-top">
-            <h3>Hermes</h3>
-            <span class="badge live"><span class="d"></span>Running</span>
-            <span class="role">LLM agent · Telegram</span>
-          </div>
-          <p>A personal Telegram assistant bot wired to an LLM backend, running persistently on WSL2 via the Nous Hermes agent. Routes through OpenRouter (Gemini 2.5 Flash) and survives reboots through Task Scheduler — built to be a reliable, always-on personal interface rather than a weekend demo.</p>
-          <div class="meta">
-            <span class="tag">Python</span><span class="tag">WSL2</span><span class="tag">OpenRouter</span><span class="tag">LLM</span><span class="tag">persistence</span>
-          </div>
-        </article>
-
-        <article class="mon">
-          <div class="mon-top">
-            <h3>FindMyStuff</h3>
-            <span class="badge dev"><span class="d"></span>Beta · v1.3</span>
-            <span class="role">Android · Kotlin</span>
-          </div>
-          <p>A privacy-first Android app for indexing and searching your own documents and images entirely on-device. Built in Kotlin with on-device OCR and a local full-text search index — no data ever leaves the phone.</p>
-          <div class="meta">
-            <span class="tag">Kotlin</span><span class="tag">Android</span><span class="tag">ML Kit OCR</span><span class="tag">Room FTS</span><span class="tag">on-device</span>
-          </div>
-        </article>
-
-        <article class="mon">
-          <div class="mon-top">
-            <h3>MemoListener</h3>
-            <span class="badge dev"><span class="d"></span>Pre-launch</span>
-            <span class="role">Android · Kotlin</span>
-          </div>
-          <p>An on-device Hebrew voice-memo and transcription app for Android, built in Kotlin around the platform's speech engine with a strong privacy stance — no cloud, no off-device backup. Developed with a comprehensive automated test suite.</p>
-          <div class="meta">
-            <span class="tag">Kotlin</span><span class="tag">Android</span><span class="tag">speech-to-text</span><span class="tag">on-device</span><span class="tag">tested</span>
-          </div>
-        </article>
-
-        <article class="mon">
-          <div class="mon-top">
             <h3>NetLens</h3>
             <span class="badge dev"><span class="d"></span>In development</span>
             <span class="role">security tooling · concept</span>
@@ -391,6 +397,18 @@
           <p>An autonomous, per-process network traffic investigator. NetLens watches what each process is talking to, uses LLM-based reasoning to explain <em>why</em> a connection looks suspicious in plain language, and offers cautious one-click blocking — turning raw network telemetry into a decision a human can actually make.</p>
           <div class="meta">
             <span class="tag">network analysis</span><span class="tag">LLM reasoning</span><span class="tag">endpoint security</span>
+          </div>
+        </article>
+
+        <article class="mon">
+          <div class="mon-top">
+            <h3>Hermes</h3>
+            <span class="badge live"><span class="d"></span>Running</span>
+            <span class="role">LLM agent · Telegram</span>
+          </div>
+          <p>A personal Telegram assistant bot wired to an LLM backend, running persistently on WSL2 via the Nous Hermes agent. Routes through OpenRouter (Gemini 2.5 Flash) and survives reboots through Task Scheduler — built to be a reliable, always-on personal interface rather than a weekend demo.</p>
+          <div class="meta">
+            <span class="tag">Python</span><span class="tag">WSL2</span><span class="tag">OpenRouter</span><span class="tag">LLM</span><span class="tag">persistence</span>
           </div>
         </article>
 
