@@ -1,3 +1,4 @@
+<!doctype html>
 <!-- Asaf — QA & Cybersecurity portfolio. Single self-contained file. -->
 <html lang="en">
 <head>
@@ -208,7 +209,100 @@
     *{animation:none!important;transition:none!important;scroll-behavior:auto!important}
     .boot .ln{opacity:1!important}
   }
+
+  /* =========================================================
+     STORY MODE — scroll-driven career presentation
+     ========================================================= */
+  html:not(.js) .story{display:none}
+  .story{padding:0;position:relative}
+  .story-track{position:relative;height:calc(var(--chapters,6) * 80vh + 100vh)}
+  .stage{position:sticky;top:0;height:100vh;height:100svh;overflow:hidden}
+  .stage canvas{position:absolute;inset:0;width:100%;height:100%;display:block;z-index:1}
+  .stage .scrim{position:absolute;inset:0;pointer-events:none;z-index:2;
+    background:linear-gradient(90deg,rgba(10,14,20,.94) 0%,rgba(10,14,20,.72) 30%,rgba(10,14,20,0) 52%)}
+  .stage .scan{position:absolute;left:0;right:0;height:160px;top:-160px;pointer-events:none;z-index:2;
+    background:linear-gradient(180deg,transparent,rgba(63,224,201,.045),transparent);animation:scan 7s linear infinite}
+  @keyframes scan{to{top:100%}}
+  .stage .glitch{position:absolute;inset:0;pointer-events:none;z-index:6;opacity:0;
+    background:repeating-linear-gradient(0deg,rgba(63,224,201,.08) 0 2px,transparent 2px 5px)}
+  .stage.flash .glitch{animation:flash .5s steps(6) 1}
+  @keyframes flash{0%{opacity:0}15%{opacity:1;transform:translateX(-8px)}35%{opacity:.35;transform:translateX(6px)}55%{opacity:.8;transform:translateX(-3px)}100%{opacity:0;transform:none}}
+
+  .stage .frame{position:absolute;inset:0;max-width:1320px;margin:0 auto;z-index:4}
+  .brk{position:absolute;width:20px;height:20px;border:0 solid var(--accent-line);pointer-events:none}
+  .brk.tl{top:70px;left:14px;border-top-width:1px;border-left-width:1px}
+  .brk.tr{top:70px;right:14px;border-top-width:1px;border-right-width:1px}
+  .brk.bl{bottom:14px;left:14px;border-bottom-width:1px;border-left-width:1px}
+  .brk.br{bottom:14px;right:14px;border-bottom-width:1px;border-right-width:1px}
+
+  .hud{position:absolute;pointer-events:none;font-family:var(--mono);font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:var(--muted-2)}
+  .hud-tl{top:88px;left:40px;display:flex;align-items:center;gap:10px;color:var(--muted)}
+  .hud-tl .rec{width:7px;height:7px;border-radius:50%;background:#FF4D6D;box-shadow:0 0 8px #FF4D6D;animation:blink 1.2s steps(2) infinite}
+  .hud-tr{top:84px;right:40px;text-align:right}
+  .hud-tr .ch{font-family:var(--display);font-size:38px;font-weight:700;color:var(--text);letter-spacing:.02em;line-height:1}
+  .hud-tr .ch em{font-style:normal;color:var(--muted-2);font-size:18px}
+  .hud-tr .nm2{color:var(--accent);margin-top:8px}
+
+  .rail{position:absolute;right:40px;top:50%;transform:translateY(-50%);display:flex;flex-direction:column;gap:18px;align-items:flex-end}
+  .rail button{all:unset;cursor:pointer;display:flex;align-items:center;gap:12px;font-family:var(--mono);font-size:10.5px;letter-spacing:.16em;color:var(--muted-2);transition:color .3s}
+  .rail button i{display:block;width:14px;height:2px;background:var(--line-strong);transition:width .35s,background .35s,box-shadow .35s}
+  .rail button:hover{color:var(--text)}
+  .rail button.on{color:var(--accent)}
+  .rail button.on i{width:34px;background:var(--accent);box-shadow:0 0 10px var(--accent)}
+  .rail button:focus-visible{outline:2px solid var(--accent);outline-offset:4px}
+
+  .telemetry{bottom:34px;right:40px;display:grid;grid-template-columns:auto auto;gap:5px 18px}
+  .telemetry b{font-weight:500;color:var(--text);letter-spacing:.1em}
+  .skip{position:absolute;bottom:30px;left:40px;font-family:var(--mono);font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--muted);border:1px solid var(--line-strong);border-radius:6px;padding:7px 12px;transition:.2s}
+  .skip:hover{color:var(--text);border-color:var(--accent-line);background:var(--accent-dim)}
+  .hint{position:absolute;left:50%;bottom:30px;transform:translateX(-50%);font-family:var(--mono);font-size:11px;letter-spacing:.3em;color:var(--accent);display:flex;flex-direction:column;align-items:center;gap:6px;transition:opacity .4s;pointer-events:none}
+  .hint i{font-style:normal;animation:bob 1.4s ease-in-out infinite}
+  .hint.gone{opacity:0}
+  @keyframes bob{50%{transform:translateY(5px)}}
+  .sbar{position:absolute;left:0;right:0;bottom:0;height:2px;background:var(--line);z-index:5}
+  .sbar i{display:block;height:100%;width:100%;transform-origin:0 50%;transform:scaleX(0);background:linear-gradient(90deg,var(--accent),var(--violet));box-shadow:0 0 12px var(--accent)}
+
+  .chap{position:absolute;left:40px;top:50%;max-width:480px;opacity:0;visibility:hidden;
+    transform:translateY(-50%) translateY(40px);filter:blur(8px);
+    transition:opacity .55s ease,transform .75s cubic-bezier(.2,.8,.2,1),filter .55s ease,visibility 0s linear .6s}
+  .chap.past{transform:translateY(-50%) translateY(-40px)}
+  .chap.on{opacity:1;visibility:visible;filter:none;transform:translateY(-50%);transition-delay:0s}
+  .chap .kick{font-family:var(--mono);font-size:11.5px;letter-spacing:.22em;color:var(--accent);text-transform:uppercase;display:flex;align-items:center;gap:10px;margin-bottom:18px}
+  .chap .kick::before{content:"";width:22px;height:1px;background:var(--accent-line)}
+  .chap h3{font-family:var(--display);font-weight:700;font-size:clamp(34px,4.6vw,58px);line-height:1.02;letter-spacing:-.01em;margin-bottom:20px}
+  .chap h3 span{display:block}
+  .chap h3 .hl{color:var(--accent);text-shadow:0 0 28px rgba(63,224,201,.35)}
+  .chap p{color:var(--muted);font-size:16.5px;max-width:450px}
+  .chap p strong{color:var(--text);font-weight:600}
+  .chap .chips{display:flex;flex-wrap:wrap;gap:8px;margin-top:22px}
+  .chap .chips .tag{opacity:0;transform:translateY(8px);transition:opacity .45s,transform .45s}
+  .chap.on .chips .tag{opacity:1;transform:none}
+  .chap.on .chips .tag:nth-child(1){transition-delay:.25s}
+  .chap.on .chips .tag:nth-child(2){transition-delay:.33s}
+  .chap.on .chips .tag:nth-child(3){transition-delay:.41s}
+  .chap.on .chips .tag:nth-child(4){transition-delay:.49s}
+  .chap .cta-row{margin-top:26px}
+
+  @media(max-width:860px){
+    .stage .scrim{background:linear-gradient(0deg,rgba(10,14,20,.97) 0%,rgba(10,14,20,.88) 38%,rgba(10,14,20,0) 60%)}
+    .chap{left:16px;right:16px;top:auto;bottom:62px;max-width:none;transform:translateY(34px)}
+    .chap.past{transform:translateY(-34px)}
+    .chap.on{transform:none}
+    .chap h3{font-size:clamp(28px,8.4vw,42px);margin-bottom:12px}
+    .chap p{font-size:15px}
+    .chap .kick{margin-bottom:10px}
+    .chap .chips{margin-top:14px}
+    .chap .cta-row{margin-top:18px;gap:10px}
+    .hud-tl{top:72px;left:16px;font-size:10px}
+    .hud-tr{top:68px;right:16px}.hud-tr .ch{font-size:24px}.hud-tr .ch em{font-size:13px}.hud-tr .nm2{font-size:10px;margin-top:4px}
+    .rail{right:14px;top:38%;gap:12px}.rail button span{display:none}
+    .telemetry,.hint{display:none}
+    .skip{left:auto;right:16px;bottom:18px;font-size:10px;padding:5px 9px}
+    .brk.tl,.brk.tr{top:60px}
+    .brk{width:14px;height:14px}
+  }
 </style>
+<script>document.documentElement.className+=" js";</script>
 </head>
 <body class="booting">
 
@@ -217,6 +311,7 @@
     <div class="wrap row">
       <div class="mark">ASAF<span class="dot">.</span>QA</div>
       <nav class="nav">
+        <a href="#story">story</a>
         <a href="#profile">profile</a>
         <a href="#capabilities">capabilities</a>
         <a href="#projects">projects</a>
@@ -254,6 +349,78 @@
     </div>
   </section>
 
+  <!-- ===== story mode (scrollytelling) ===== -->
+  <section class="story" id="story" aria-label="Career story, scroll to play">
+    <div class="story-track" id="storyTrack">
+      <div class="stage" id="stage">
+        <canvas id="fx" aria-hidden="true"></canvas>
+        <div class="scrim" aria-hidden="true"></div>
+        <div class="scan" aria-hidden="true"></div>
+        <div class="glitch" aria-hidden="true"></div>
+        <div class="frame">
+          <span class="brk tl"></span><span class="brk tr"></span><span class="brk bl"></span><span class="brk br"></span>
+          <div class="hud hud-tl"><span class="rec"></span>Story mode · scroll to play</div>
+          <div class="hud hud-tr" aria-hidden="true"><div class="ch"><span id="chNum">01</span><em> / 06</em></div><div class="nm2" id="chName">INIT</div></div>
+          <nav class="rail" id="rail" aria-label="Story chapters"></nav>
+          <div class="hud telemetry" aria-hidden="true">
+            <span>Formation</span><b id="tForm">GLOBE</b>
+            <span>Nodes</span><b id="tNodes">—</b>
+            <span>Era</span><b id="tEra">—</b>
+            <span>Sync</span><b id="tSync">0%</b>
+          </div>
+          <a class="skip" href="#profile">skip story ⤓</a>
+          <div class="hint" id="hint" aria-hidden="true">SCROLL<i>▼</i></div>
+
+          <article class="chap on" data-name="INIT" data-form="BUG SMASH" data-era="20+ YEARS">
+            <div class="kick">01 · Init</div>
+            <h3><span>Twenty years of</span><span>breaking systems</span><span class="hl">on purpose.</span></h3>
+            <p><strong>20+ years in QA</strong>, about ten of them in <strong>cybersecurity</strong>, one of the least forgiving corners of software. Here's the short version.</p>
+            <div class="chips"><span class="tag">20+ years in QA</span><span class="tag">~10 in cybersecurity</span><span class="tag">5+ security domains</span></div>
+          </article>
+
+          <article class="chap" data-name="FOUNDATION" data-form="LATTICE" data-era="EARLIER">
+            <div class="kick">02 · SafeNet · Aladdin</div>
+            <h3><span>Where trust</span><span class="hl">gets built.</span></h3>
+            <p>Quality work across <strong>PKI, VPN and authentication</strong> products, where a missed defect means broken trust.</p>
+            <div class="chips"><span class="tag">PKI</span><span class="tag">VPN</span><span class="tag">Authentication</span></div>
+          </article>
+
+          <article class="chap" data-name="LEADERSHIP" data-form="FIREWALL" data-era="PRIOR">
+            <div class="kick">03 · AlgoSec</div>
+            <h3><span>Leading the</span><span class="hl">automation.</span></h3>
+            <p><strong>Tech Lead</strong> for a team of automation engineers, owning QA for enterprise firewall and security-policy management. It's the domain that still shapes how I think about network rules and exposure.</p>
+            <div class="chips"><span class="tag">Tech Lead</span><span class="tag">Firewall management</span><span class="tag">Security policy</span></div>
+          </article>
+
+          <article class="chap" data-name="DECEPTION" data-form="DECOY NET" data-era="RECENT">
+            <div class="kick">04 · Proofpoint · Illusive</div>
+            <h3><span>Thinking like</span><span class="hl">the attacker.</span></h3>
+            <p>Quality ownership for <strong>identity-protection and deception</strong> (honeypot) products, building and running automation across complex endpoint and network scenarios. The amber nodes? <strong>Decoys.</strong></p>
+            <div class="chips"><span class="tag">Identity protection</span><span class="tag">Honeypots</span><span class="tag">Endpoint &amp; network</span></div>
+          </article>
+
+          <article class="chap" data-name="BUILDER" data-form="HELIX" data-era="OFF THE CLOCK">
+            <div class="kick">05 · Off the clock</div>
+            <h3><span>Building</span><span class="hl">my own.</span></h3>
+            <p><strong>KolMelel</strong> is live on Google Play, and <strong>MesudarLi</strong> launches any day now: two privacy-first Android apps that keep your data on the device. And every day, <strong>Hermes</strong>, my LLM agent, runs my ongoing tasks remotely.</p>
+            <div class="chips"><span class="tag">Kotlin · Android</span><span class="tag">On-device</span><span class="tag">LLM agent</span></div>
+          </article>
+
+          <article class="chap" data-name="STATUS" data-form="SIGNATURE" data-era="NOW">
+            <div class="kick">06 · Status</div>
+            <h3><span>Available</span><span class="hl">for hire.</span></h3>
+            <p>Open to senior QA automation roles. If you're building security products and want someone who understands both the test and the threat, let's talk.</p>
+            <div class="cta-row">
+              <a class="btn primary" href="#contact">Get in touch</a>
+              <a class="btn" href="Asaf_Sade_QA_Resume_2026.pdf" download>Download CV</a>
+            </div>
+          </article>
+        </div>
+        <div class="sbar" aria-hidden="true"><i id="sbar"></i></div>
+      </div>
+    </div>
+  </section>
+
   <!-- ===== profile ===== -->
   <section id="profile">
     <div class="wrap">
@@ -263,7 +430,7 @@
         <span class="sec-id mono">// who_is_this.md</span>
       </div>
       <div class="prose">
-        <p>I'm a Senior QA Engineer who has spent two decades in one of the least forgiving corners of software: <strong>cybersecurity</strong>. My work spans identity protection, deception (honeypots), VPN/PKI, firewall management, and data loss prevention — across Linux and Windows endpoints, containers, cloud, and enterprise networking.</p>
+        <p>I'm a Senior QA Engineer with 20+ years in software quality, about ten of them in one of the least forgiving corners of software: <strong>cybersecurity</strong>. My security work spans identity protection, deception (honeypots), VPN/PKI, firewall management, and data loss prevention — across Linux and Windows endpoints, containers, cloud, and enterprise networking.</p>
         <p>I've led automation engineers as a Tech Lead and I treat quality as an engineering discipline, not a gate at the end. My differentiator is <strong>domain depth</strong>: I understand the products I test as a security practitioner would, which means I find the failures that matter, not just the ones that are easy to reach.</p>
         <p>In my own time I build automation and security tooling for the pleasure of it — a personal trading agent, network and firewall utilities, LLM-driven assistants. The instinct to instrument, monitor, and verify doesn't switch off.</p>
       </div>
@@ -354,8 +521,8 @@
 
         <article class="mon">
           <div class="mon-top">
-            <h3>FindMyStuff</h3>
-            <span class="badge dev"><span class="d"></span>Beta · v1.3</span>
+            <h3>MesudarLi</h3>
+            <span class="badge dev"><span class="d"></span>Launching soon</span>
             <span class="role">Android · Kotlin</span>
           </div>
           <p>A privacy-first Android app for indexing and searching your own documents and images entirely on-device. Built in Kotlin with on-device OCR and a local full-text search index — no data ever leaves the phone.</p>
@@ -390,25 +557,13 @@
 
         <article class="mon">
           <div class="mon-top">
-            <h3>NetLens</h3>
-            <span class="badge dev"><span class="d"></span>In development</span>
-            <span class="role">security tooling · concept</span>
-          </div>
-          <p>An autonomous, per-process network traffic investigator. NetLens watches what each process is talking to, uses LLM-based reasoning to explain <em>why</em> a connection looks suspicious in plain language, and offers cautious one-click blocking — turning raw network telemetry into a decision a human can actually make.</p>
-          <div class="meta">
-            <span class="tag">network analysis</span><span class="tag">LLM reasoning</span><span class="tag">endpoint security</span>
-          </div>
-        </article>
-
-        <article class="mon">
-          <div class="mon-top">
             <h3>Hermes</h3>
-            <span class="badge live"><span class="d"></span>Running</span>
+            <span class="badge live"><span class="d"></span>Daily use</span>
             <span class="role">LLM agent · Telegram</span>
           </div>
-          <p>A personal Telegram assistant bot wired to an LLM backend, running persistently on WSL2 via the Nous Hermes agent. Routes through OpenRouter (Gemini 2.5 Flash) and survives reboots through Task Scheduler — built to be a reliable, always-on personal interface rather than a weekend demo.</p>
+          <p>My personal LLM agent on Telegram. I use it every day to run my ongoing tasks remotely.</p>
           <div class="meta">
-            <span class="tag">Python</span><span class="tag">WSL2</span><span class="tag">OpenRouter</span><span class="tag">LLM</span><span class="tag">persistence</span>
+            <span class="tag">LLM agent</span><span class="tag">Telegram</span><span class="tag">automation</span>
           </div>
         </article>
 
@@ -465,7 +620,7 @@
           <div class="when">EARLIER</div>
           <h3>QA Engineer</h3>
           <div class="co">SafeNet · Aladdin</div>
-          <p>Quality work across PKI, VPN, and authentication products — the foundation of a career spent entirely inside security.</p>
+          <p>Quality work across PKI, VPN, and authentication products — where a missed defect means broken trust.</p>
         </div>
       </div>
     </div>
@@ -583,6 +738,470 @@
       on=!on;
       c.textContent = on ? 'AVAILABLE' : new Date().toLocaleTimeString('en-GB');
     }, 3500);
+  })();
+
+  /* ===== STORY MODE: scroll-driven 3D particle presentation ===== */
+  (function(){
+    var RM = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    var GL = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789#%&$/<>*+=?";
+    function decode(el, dur){
+      if(RM || !el) return;
+      var target = el.getAttribute('data-txt');
+      if(target == null){ target = el.textContent; el.setAttribute('data-txt', target); }
+      if(el._dc) cancelAnimationFrame(el._dc);
+      var t0 = performance.now(), L = target.length;
+      (function step(now){
+        var p = Math.min((now - t0) / dur, 1), lock = Math.floor(p * L), out = '';
+        for(var i = 0; i < L; i++){
+          var ch = target.charAt(i);
+          out += (i < lock || ch === ' ') ? ch : GL.charAt((Math.random() * GL.length) | 0);
+        }
+        el.textContent = out;
+        if(p < 1) el._dc = requestAnimationFrame(step); else { el.textContent = target; el._dc = null; }
+      })(t0);
+    }
+
+    // section headings decode as they scroll into view
+    if('IntersectionObserver' in window && !RM){
+      var ho = new IntersectionObserver(function(es){
+        es.forEach(function(e){ if(e.isIntersecting){ decode(e.target, 650); ho.unobserve(e.target); } });
+      }, {threshold: .7});
+      [].forEach.call(document.querySelectorAll('.sec-head h2, .contact h2'), function(h){ ho.observe(h); });
+    }
+
+    var track = document.getElementById('storyTrack'); if(!track) return;
+    var stage = document.getElementById('stage'), cv = document.getElementById('fx');
+    var ctx = cv.getContext && cv.getContext('2d'); if(!ctx) return;
+    var chaps = [].slice.call(track.querySelectorAll('.chap')), N = chaps.length;
+    track.style.setProperty('--chapters', N);
+
+    /* ---------- particles ---------- */
+    var P = window.innerWidth < 760 ? 950 : 1600;
+    var seed = 1337;
+    function rnd(){ seed = (seed * 16807) % 2147483647; return (seed - 1) / 2147483646; }
+    function gs(){ var u = rnd() || 1e-9, v = rnd(); return Math.sqrt(-2 * Math.log(u)) * Math.cos(6.2832 * v); }
+    var special = new Uint8Array(P), DL = new Float32Array(P), DR = new Float32Array(P * 3), BR = new Float32Array(P);
+    var G0 = [], G1 = [], G2 = [];
+    for(var i = 0; i < P; i++){
+      special[i] = (i % 9 === 0) ? 1 : 0;
+      if(special[i]) G2.push(i); else if(i % 5 === 0) G1.push(i); else G0.push(i);
+      DL[i] = rnd(); BR[i] = .4 + rnd() * .8;
+      var ux = gs(), uy = gs(), uz = gs(), ul = Math.sqrt(ux*ux + uy*uy + uz*uz) || 1;
+      DR[i*3] = ux/ul; DR[i*3+1] = uy/ul; DR[i*3+2] = uz/ul;
+    }
+    function F(){ return {pos: new Float32Array(P * 3), edges: [], alt: [], ea: .25, sig: []}; }
+    function put(f, i, x, y, z){ var k = i * 3; f.pos[k] = x; f.pos[k+1] = y; f.pos[k+2] = z; }
+    function onEdge(f, ep, i){
+      var e = ((rnd() * ep.length / 2) | 0) * 2, a = ep[e] * 3, b = ep[e+1] * 3, t = rnd(), p = f.pos;
+      put(f, i, p[a] + (p[b]-p[a]) * t, p[a+1] + (p[b+1]-p[a+1]) * t, p[a+2] + (p[b+2]-p[a+2]) * t);
+    }
+    function sigs(f, n){ var E = f.edges.length / 2; if(!E) return; for(var j = 0; j < n; j++) f.sig.push(((rnd() * E) | 0) * 2, rnd()); }
+
+    // 01 — globe with orbit ring
+    function fSphere(){
+      var f = F(), ring = Math.floor(P * .2), n = P - ring, g = Math.PI * (3 - Math.sqrt(5)), tl = .42;
+      for(var i = 0; i < n; i++){ var y = 1 - 2 * (i + .5) / n, r = Math.sqrt(1 - y*y), th = g * i; put(f, i, Math.cos(th) * r, y, Math.sin(th) * r); }
+      for(var j = 0; j < ring; j++){
+        var th = j / ring * 6.2832, rr = 1.42 + gs() * .012, x = Math.cos(th) * rr, z = Math.sin(th) * rr;
+        put(f, n + j, x, -z * Math.sin(tl), z * Math.cos(tl));
+      }
+      f.spin = function(t, s){ return {yaw: t * .22 + s * .9, pitch: .32, roll: .12}; };
+      return f;
+    }
+    // 01 — a hammer smashing a monitor
+    //      teal particles = computer + floor + cracks, violet = hammer
+    function fSmash(){
+      var f = F(); f.altCol = '#8B7CFF';
+      f.ty = new Uint8Array(P); f.fm = new Uint8Array(P); f.dx = new Float32Array(P); f.dy = new Float32Array(P); f.ph = new Float32Array(P);
+      var S = .95, OX = -.08, OY = -.12;
+      function T(p){ return [p[0] * S + OX, p[1] * S + OY, p[2] * S]; }
+      var ti = 0, vi = 0, ai = 0;
+      // types: 0 static, 1 hammer (swings), 2 crack (shatters), 3 monitor (shakes), 4 bug leg (twitches), 5 bug body
+      function setP(i, p, ty){ var q = T(p); put(f, i, q[0], q[1], q[2]); f.ty[i] = ty; f.fm[i] = (ty > 0 && ty !== 5) ? 1 : 0; f.ph[i] = rnd() * 6.2832; }
+      function node(g, p, ty){ var i = g === 0 ? G0[ti++] : g === 1 ? G1[vi++] : G2[ai++]; setP(i, p, ty); return i; }
+      var teal = [], vio = [], amb = [], ep = [], alt = [];
+      function seg(L, a, b, w, ty){ L.push([a[0], a[1], a[2], b[0], b[1], b[2], w, ty]); }
+      function rect(L, x0, y0, x1, y1, z, w, ty){ seg(L,[x0,y0,z],[x1,y0,z],w,ty); seg(L,[x1,y0,z],[x1,y1,z],w,ty); seg(L,[x1,y1,z],[x0,y1,z],w,ty); seg(L,[x0,y1,z],[x0,y0,z],w,ty); }
+      function ell(L, cx, cy, cz, rx, ry, rz, w, ty){
+        for(var k = 0; k < 28; k++){ var a0 = k / 28 * 6.2832, a1 = (k + 1) / 28 * 6.2832;
+          seg(L, [cx + Math.cos(a0) * rx, cy + Math.sin(a0) * ry, cz + Math.sin(a0) * rz], [cx + Math.cos(a1) * rx, cy + Math.sin(a1) * ry, cz + Math.sin(a1) * rz], w, ty); }
+      }
+      function sampler(L){
+        var cum = [], tot = 0;
+        L.forEach(function(g){ tot += Math.sqrt((g[3]-g[0])*(g[3]-g[0]) + (g[4]-g[1])*(g[4]-g[1]) + (g[5]-g[2])*(g[5]-g[2])) * g[6]; cum.push(tot); });
+        return function(){
+          var r = rnd() * tot, lo = 0, hi = cum.length - 1;
+          while(lo < hi){ var mid = (lo + hi) >> 1; if(cum[mid] < r) lo = mid + 1; else hi = mid; }
+          var g = L[lo], t = rnd();
+          return [g[0] + (g[3]-g[0]) * t, g[1] + (g[4]-g[1]) * t, g[2] + (g[5]-g[2]) * t, g[7]];
+        };
+      }
+
+      // --- monitor: a thin box with an inset screen ---
+      var mx0 = -.95, mx1 = .55, my0 = -.3, my1 = .7, zf = .06, zb = -.06;
+      rect(teal, mx0, my0, mx1, my1, zf, 1, 3); rect(teal, mx0, my0, mx1, my1, zb, .45, 3);
+      rect(teal, mx0 + .08, my0 + .08, mx1 - .08, my1 - .08, zf, .8, 3);
+      var nf = [], nb = [];
+      [[mx0,my0],[mx1,my0],[mx1,my1],[mx0,my1]].forEach(function(c){ nf.push(node(0, [c[0], c[1], zf], 3)); nb.push(node(0, [c[0], c[1], zb], 3)); });
+      for(var k = 0; k < 4; k++) ep.push(nf[k], nf[(k+1)%4], nb[k], nb[(k+1)%4], nf[k], nb[k]);
+      [[.5,.34,0],[.42,.46,.08],[.34,.3,.08],[.26,.4,.16],[.18,.22,.08],[.1,.36,0]].forEach(function(c){ seg(teal, [mx0 + .16 + c[2], c[0], zf], [mx0 + .16 + c[2] + c[1], c[0], zf], .55, 3); });
+      // stand + base
+      seg(teal, [-.27, my0, 0], [-.27, -.5, 0], 1, 3); seg(teal, [-.13, my0, 0], [-.13, -.5, 0], 1, 3);
+      ell(teal, -.2, -.5, 0, .34, 0, .2, .9, 3);
+      // keyboard lying in front
+      var ky = -.56, kx0 = -.85, kx1 = .45, kz0 = .3, kz1 = .62, kc = [[kx0,kz0],[kx1,kz0],[kx1,kz1],[kx0,kz1]], kn = [];
+      for(var k2 = 0; k2 < 4; k2++){ var A = kc[k2], B = kc[(k2+1)%4]; seg(teal, [A[0], ky, A[1]], [B[0], ky, B[1]], 1, 0); kn.push(node(0, [A[0], ky, A[1]], 0)); }
+      for(var k3 = 0; k3 < 4; k3++) ep.push(kn[k3], kn[(k3+1)%4]);
+      for(var r = 0; r < 3; r++){ var kz = kz0 + .08 + r * .08; for(var kx = kx0 + .07; kx < kx1 - .1; kx += .1) seg(teal, [kx, ky, kz], [kx + .06, ky, kz], .9, 0); }
+      // floor grid
+      [-.35, .05, .45, .85].forEach(function(z){ seg(teal, [-1.05, -.6, z], [1.3, -.6, z], .2, 0); });
+      for(var fx = -1.0; fx <= 1.3; fx += .45) seg(teal, [fx, -.6, -.35], [fx, -.6, .85], .2, 0);
+      // cracks radiating from the impact point on the top edge of the screen
+      var I = [.25, my1 - .08], ci = node(0, [I[0], I[1], zf], 2);
+      for(var ray = 0; ray < 7; ray++){
+        var ang = -Math.PI * (.08 + .84 * ray / 6) + (rnd() - .5) * .25, p = [I[0], I[1]], prev = ci, ns = 2 + ((rnd() * 2) | 0);
+        for(var sN = 0; sN < ns; sN++){
+          ang += (rnd() - .5) * .7;
+          var len = .1 + rnd() * .14, q = [p[0] + Math.cos(ang) * len, p[1] + Math.sin(ang) * len];
+          q[0] = Math.min(Math.max(q[0], mx0 + .09), mx1 - .09); q[1] = Math.min(Math.max(q[1], my0 + .09), my1 - .09);
+          seg(teal, [p[0], p[1], zf], [q[0], q[1], zf], 1.7, 2);
+          var nd = node(0, [q[0], q[1], zf], 2); ep.push(prev, nd); prev = nd; p = q;
+        }
+      }
+
+      // --- hammer: head is a box, handle ends at the wrist pivot ---
+      var PV = [1.38, .95], hx0 = .16, hx1 = .34, hy0 = .7, hy1 = 1.04, hz = .09;
+      rect(vio, hx0, hy0, hx1, hy1, hz, 1, 1); rect(vio, hx0, hy0, hx1, hy1, -hz, 1, 1);
+      var hf = [], hb = [];
+      [[hx0,hy0],[hx1,hy0],[hx1,hy1],[hx0,hy1]].forEach(function(c){ seg(vio, [c[0], c[1], hz], [c[0], c[1], -hz], 1, 1); hf.push(node(1, [c[0], c[1], hz], 1)); hb.push(node(1, [c[0], c[1], -hz], 1)); });
+      for(var k4 = 0; k4 < 4; k4++) alt.push(hf[k4], hf[(k4+1)%4], hb[k4], hb[(k4+1)%4], hf[k4], hb[k4]);
+      var h0t = [hx1, .895, 0], h0b = [hx1, .845, 0], h1t = [PV[0], PV[1] + .025, 0], h1b = [PV[0], PV[1] - .025, 0];
+      seg(vio, h0t, h1t, 1, 1); seg(vio, h0b, h1b, 1, 1); seg(vio, h1t, h1b, 1, 1);
+      var gs0 = [hx1 + (PV[0] - hx1) * .62, .87 + (PV[1] - .87) * .62];
+      seg(vio, [gs0[0], gs0[1] + .045, 0], [PV[0], PV[1] + .045, 0], .9, 1); seg(vio, [gs0[0], gs0[1] - .045, 0], [PV[0], PV[1] - .045, 0], .9, 1);
+      var a1 = node(1, h0t, 1), a2 = node(1, h1t, 1), a3 = node(1, h0b, 1), a4 = node(1, h1b, 1);
+      alt.push(a1, a2, a3, a4, a2, a4);
+
+      // fill every remaining particle of each colour group along its shapes
+      var sT = sampler(teal), sV = sampler(vio), v;
+      for(; ti < G0.length; ti++){ v = sT(); setP(G0[ti], v, v[3]); }
+      for(; vi < G1.length; vi++){ v = sV(); setP(G1[vi], v, v[3]); }
+      for(; ai < G2.length; ai++){ v = sT(); setP(G2[ai], v, v[3]); }
+
+      // crack shards fly out from the impact point
+      var IT = T([I[0], I[1], zf]);
+      for(var i = 0; i < P; i++) if(f.ty[i] === 2){
+        var dx = f.pos[i*3] - IT[0], dy = f.pos[i*3+1] - IT[1], dl = Math.sqrt(dx*dx + dy*dy) || 1;
+        f.dx[i] = dx / dl; f.dy[i] = dy / dl;
+      }
+      var PT = T([PV[0], PV[1], 0]), PX = PT[0], PY = PT[1], AMP = .8, CYC = 2.6;
+      function ease(x){ return x * x * (3 - 2 * x); }
+      f.flow = function(i, t, o){
+        var u = (t % CYC) / CYC, since = u * CYC, ty = f.ty[i];
+        if(ty === 1){
+          var a;
+          if(u < .18) a = -.07 * Math.sin(Math.PI * u / .18);             // recoil after the hit
+          else if(u < .72) a = -AMP * ease((u - .18) / .54);                // wind up
+          else if(u < .84) a = -AMP - .04 * Math.sin(Math.PI * (u - .72) / .12);
+          else { var q = (u - .84) / .16; a = -AMP * (1 - q * q); }         // smash, accelerating
+          var x = o[0] - PX, y = o[1] - PY, c = Math.cos(a), s = Math.sin(a);
+          o[0] = PX + x * c - y * s; o[1] = PY + x * s + y * c; return;
+        }
+        var shake = Math.sin(since * 55) * .022 * Math.exp(-since * 9);
+        if(ty === 3){ o[0] += shake; return; }
+        if(ty === 2){
+          var b = since < .45 ? Math.sin(Math.PI * since / .45) * .16 * BR[i] : 0;
+          o[0] += f.dx[i] * b + shake; o[1] += f.dy[i] * b; o[2] += b * .6 * DR[i*3+2]; return;
+        }
+        if(ty === 4){ var e = Math.exp(-since * 5); o[1] += Math.sin(since * 38 + f.ph[i]) * .028 * e; o[0] += Math.sin(since * 31 + f.ph[i]) * .012 * e; }
+      };
+      f.edges = ep; f.alt = alt; f.ea = .3; sigs(f, 10);
+      f.spin = function(t){ return {yaw: -.32 + Math.sin(t * .35) * .22, pitch: .1 + Math.sin(t * .27) * .04, roll: 0}; };
+      return f;
+    }
+    // 02 — crypto lattice
+    function fLattice(){
+      var f = F(), g = 5, S = 1.7 / (g - 1), o = -.85, ep = [];
+      function id(x, y, z){ return (x * g + y) * g + z; }
+      for(var x = 0; x < g; x++) for(var y = 0; y < g; y++) for(var z = 0; z < g; z++){
+        put(f, id(x,y,z), o + x*S, o + y*S, o + z*S);
+        if(x < g-1) ep.push(id(x,y,z), id(x+1,y,z));
+        if(y < g-1) ep.push(id(x,y,z), id(x,y+1,z));
+        if(z < g-1) ep.push(id(x,y,z), id(x,y,z+1));
+      }
+      for(var i = g*g*g; i < P; i++) onEdge(f, ep, i);
+      f.edges = ep; f.ea = .16; sigs(f, 22);
+      f.spin = function(t, s){ return {yaw: t * .16 + s * .8 + .6, pitch: .52, roll: 0}; };
+      return f;
+    }
+    // 03 — firewall: brick wall with packet streams hitting it
+    function fWall(){
+      var f = F(), R = 8, K = 15, y0 = -.95, dy = 1.9 / R, x0 = -1.4, dx = .2, ep = [];
+      function id(j, k){ return j * K + k; }
+      for(var j = 0; j <= R; j++) for(var k = 0; k < K; k++){ put(f, id(j,k), x0 + k*dx, y0 + j*dy, 0); if(k < K-1) ep.push(id(j,k), id(j,k+1)); }
+      for(var r = 0; r < R; r++) for(var k2 = 0; k2 < K; k2++){ if(k2 === 0 || k2 === K-1 || (k2 + r) % 2 === 0) ep.push(id(r,k2), id(r+1,k2)); }
+      var nn = (R+1) * K, rest = P - nn, nStream = Math.floor(rest * .28), nDeb = Math.floor(rest * .1), i = nn, S = 14, per = Math.max(1, Math.floor(nStream / S));
+      f.fm = new Uint8Array(P); f.ph = new Float32Array(P);
+      var bases = []; for(var q = 0; q < S; q++) bases.push([x0 + .15 + rnd() * 2.5, y0 + .12 + rnd() * 1.66]);
+      for(var q2 = 0; q2 < nStream; q2++, i++){
+        var b = bases[q2 % S], kk = Math.floor(q2 / S);
+        put(f, i, b[0], b[1], 0); f.fm[i] = 1; f.ph[i] = (kk / per + (q2 % S) * .137) % 1;
+      }
+      for(var q3 = 0; q3 < nDeb; q3++, i++) put(f, i, x0 + rnd() * 2.8, y0 + rnd() * 1.9, .03 + rnd() * .28);
+      for(; i < P; i++) onEdge(f, ep, i);
+      f.flow = function(i, t, o){ o[2] = .05 + (1 - ((t * .4 + f.ph[i]) % 1)) * 1.35; };
+      f.edges = ep; f.ea = .28; sigs(f, 18);
+      f.spin = function(t){ return {yaw: -.55 + Math.sin(t * .3) * .18, pitch: .1 + Math.sin(t * .21) * .05, roll: 0}; };
+      return f;
+    }
+    // 04 — deception network: hubs, links, amber decoy clusters
+    function fNet(){
+      var f = F(), H = 42, hubs = [], tries = 0;
+      while(hubs.length < H && tries < 6000){
+        tries++;
+        var x = (rnd()*2-1) * 1.3, y = (rnd()*2-1) * .95, z = (rnd()*2-1) * .85;
+        if(x*x/1.69 + y*y/.9025 + z*z/.7225 > 1) continue;
+        var ok = true;
+        for(var h = 0; h < hubs.length; h++){ var d = hubs[h], dd = (d[0]-x)*(d[0]-x) + (d[1]-y)*(d[1]-y) + (d[2]-z)*(d[2]-z); if(dd < .1){ ok = false; break; } }
+        if(ok) hubs.push([x, y, z]);
+      }
+      H = hubs.length;
+      for(var h2 = 0; h2 < H; h2++) put(f, h2, hubs[h2][0], hubs[h2][1], hubs[h2][2]);
+      function decoy(h){ return special[h] === 1; }
+      var seen = {}, ep = [], alt = [], dec = [], nor = [];
+      for(var a = 0; a < H; a++){
+        var ds = [];
+        for(var q = 0; q < H; q++) if(q !== a){ var A = hubs[a], B = hubs[q]; ds.push([(A[0]-B[0])*(A[0]-B[0]) + (A[1]-B[1])*(A[1]-B[1]) + (A[2]-B[2])*(A[2]-B[2]), q]); }
+        ds.sort(function(u, v){ return u[0] - v[0]; });
+        for(var c = 0; c < 3 && c < ds.length; c++){
+          var qq = ds[c][1], key = a < qq ? a + '-' + qq : qq + '-' + a;
+          if(seen[key]) continue; seen[key] = 1;
+          if(decoy(a) || decoy(qq)) alt.push(a, qq); else ep.push(a, qq);
+        }
+        (decoy(a) ? dec : nor).push(a);
+      }
+      for(var i = H; i < P; i++){
+        var hb;
+        if(special[i] && dec.length){ hb = hubs[dec[(rnd() * dec.length) | 0]]; put(f, i, hb[0] + gs()*.06, hb[1] + gs()*.06, hb[2] + gs()*.06); }
+        else if(rnd() < .3 && ep.length){ onEdge(f, ep, i); }
+        else { hb = hubs[nor[(rnd() * nor.length) | 0]]; put(f, i, hb[0] + gs()*.075, hb[1] + gs()*.075, hb[2] + gs()*.075); }
+      }
+      f.edges = ep; f.alt = alt; f.ea = .32; f.amber = true; sigs(f, 24);
+      f.spin = function(t, s){ return {yaw: t * .12 + s * .7, pitch: .2, roll: 0}; };
+      return f;
+    }
+    // 05 — builder helix
+    function fHelix(){
+      var f = F(), RG = 22, turns = 2.4, rad = .6, y0 = -1.3, Hh = 2.6, ep = [];
+      function pt(u, s){ var th = u * turns * 6.2832 + s * Math.PI; return [Math.cos(th) * rad, y0 + u * Hh, Math.sin(th) * rad]; }
+      for(var k = 0; k < RG; k++){ var u = k / (RG - 1), A = pt(u, 0), B = pt(u, 1); put(f, 2*k, A[0], A[1], A[2]); put(f, 2*k+1, B[0], B[1], B[2]); ep.push(2*k, 2*k+1); }
+      for(var i = 2 * RG; i < P; i++){
+        if(rnd() < .74){ var p = pt(rnd(), rnd() < .5 ? 0 : 1); put(f, i, p[0] + gs()*.012, p[1], p[2] + gs()*.012); }
+        else onEdge(f, ep, i);
+      }
+      f.edges = ep; f.ea = .35; sigs(f, 14);
+      f.spin = function(t, s){ return {yaw: t * .4 + s * 1.1, pitch: .12, roll: .42}; };
+      return f;
+    }
+    // 06 — signature: the ASAF.QA mark with a streaming underline
+    function fText(){
+      var f = F(), c = document.createElement('canvas'), W = 1100, H = 260; c.width = W; c.height = H;
+      var x = c.getContext('2d');
+      x.fillStyle = '#fff'; x.textAlign = 'center'; x.textBaseline = 'middle';
+      x.font = '700 200px "Chakra Petch", "Arial Black", sans-serif';
+      x.fillText('ASAF.QA', W/2, H/2 + 6);
+      var d = x.getImageData(0, 0, W, H).data, px = [], minX = W, maxX = 0, minY = H, maxY = 0;
+      for(var yy = 0; yy < H; yy += 2) for(var xx = 0; xx < W; xx += 2){
+        if(d[(yy * W + xx) * 4 + 3] > 140){ px.push(xx, yy); if(xx < minX) minX = xx; if(xx > maxX) maxX = xx; if(yy < minY) minY = yy; if(yy > maxY) maxY = yy; }
+      }
+      if(!px.length) return fSphere();
+      var bw = maxX - minX, bh = maxY - minY, sc = 2.4 / bw, cxp = (minX + maxX) / 2, cyp = (minY + maxY) / 2, nT = Math.floor(P * .86), i = 0;
+      for(; i < nT; i++){ var k = ((rnd() * px.length / 2) | 0) * 2; put(f, i, (px[k] - cxp + rnd() - .5) * sc, -(px[k+1] - cyp + rnd() - .5) * sc, gs() * .03); }
+      var uy = -(bh / 2) * sc - .16;
+      f.fm = new Uint8Array(P); f.ph = new Float32Array(P);
+      for(; i < P; i++){ var u = rnd(); put(f, i, (u - .5) * 2.4, uy, 0); f.fm[i] = 1; f.ph[i] = u; }
+      f.flow = function(i, t, o){ o[0] = (((t * .12 + f.ph[i]) % 1) - .5) * 2.4; };
+      f.spin = function(t){ return {yaw: Math.sin(t * .45) * .2, pitch: Math.sin(t * .33) * .07, roll: 0}; };
+      return f;
+    }
+
+    var forms = [fSmash(), fLattice(), fWall(), fNet(), fHelix(), fText()];
+    while(forms.length < N) forms.push(fSphere());
+    if(document.fonts && document.fonts.load){
+      document.fonts.load('700 200px "Chakra Petch"').then(function(){ forms[5] = fText(); }).catch(function(){});
+    }
+
+    function mk(r){ return {cy: Math.cos(r.yaw), sy: Math.sin(r.yaw), cx: Math.cos(r.pitch), sx: Math.sin(r.pitch), cz: Math.cos(r.roll || 0), sz: Math.sin(r.roll || 0)}; }
+    function rot(o, R){
+      var x = o[0] * R.cz - o[1] * R.sz, y = o[0] * R.sz + o[1] * R.cz, z = o[2];
+      var x2 = x * R.cy + z * R.sy, z2 = -x * R.sy + z * R.cy;
+      o[0] = x2; o[1] = y * R.cx - z2 * R.sx; o[2] = y * R.sx + z2 * R.cx;
+    }
+    function getPos(f, i, t, o){ var k = i * 3; o[0] = f.pos[k]; o[1] = f.pos[k+1]; o[2] = f.pos[k+2]; if(f.flow && f.fm[i]) f.flow(i, t, o); }
+    function smooth(a, b, x){ x = (x - a) / (b - a); x = x < 0 ? 0 : x > 1 ? 1 : x; return x * x * (3 - 2 * x); }
+
+    /* ---------- layout ---------- */
+    var dpr = 1, cx = 0, cy = 0, Rp = 1, lastW = 0, lastH = 0;
+    function layout(force){
+      var w = stage.clientWidth, h = stage.clientHeight;
+      if(!force && w === lastW && Math.abs(h - lastH) < 120) return;
+      lastW = w; lastH = h;
+      dpr = Math.min(window.devicePixelRatio || 1, 2);
+      cv.width = Math.round(w * dpr); cv.height = Math.round(h * dpr);
+      if(w < 860){ cx = w * .5; cy = h * .35; Rp = Math.min(w * .26, h * .19); }
+      else { cx = w * .61; cy = h * .54; Rp = Math.min(w * .175, h * .26); }
+      cx *= dpr; cy *= dpr; Rp *= dpr;
+    }
+    layout(true);
+    window.addEventListener('resize', function(){ layout(false); });
+
+    /* ---------- HUD wiring ---------- */
+    var rail = document.getElementById('rail'), btns = [];
+    chaps.forEach(function(c, k){
+      var b = document.createElement('button');
+      b.type = 'button';
+      b.innerHTML = '<span>' + c.getAttribute('data-name') + '</span><i></i>';
+      b.setAttribute('aria-label', 'Chapter ' + (k + 1) + ': ' + c.getAttribute('data-name').toLowerCase());
+      b.addEventListener('click', function(){ goTo(k); });
+      rail.appendChild(b); btns.push(b);
+    });
+    function goTo(k){
+      var L = track.offsetHeight - window.innerHeight, s = (k === N - 1) ? N - 1 : k + .02;
+      var p = Math.min(1, (s + .2) / (N - .4));
+      var top = track.getBoundingClientRect().top + window.scrollY;
+      window.scrollTo({top: top + p * L, behavior: RM ? 'auto' : 'smooth'});
+    }
+    var chNum = document.getElementById('chNum'), chName = document.getElementById('chName');
+    var tForm = document.getElementById('tForm'), tEra = document.getElementById('tEra'), tSync = document.getElementById('tSync');
+    var sbar = document.getElementById('sbar'), hint = document.getElementById('hint');
+    document.getElementById('tNodes').textContent = P.toLocaleString('en-US');
+    var active = -1;
+    function setChapter(k){
+      if(k === active) return;
+      var prev = active; active = k;
+      chaps.forEach(function(c, i){ c.classList.toggle('on', i === k); c.classList.toggle('past', i < k); });
+      btns.forEach(function(b, i){ b.classList.toggle('on', i === k); });
+      var c = chaps[k];
+      chNum.textContent = (k + 1 < 10 ? '0' : '') + (k + 1);
+      chName.textContent = c.getAttribute('data-name'); chName.removeAttribute('data-txt'); decode(chName, 500);
+      tForm.textContent = c.getAttribute('data-form'); tForm.removeAttribute('data-txt'); decode(tForm, 500);
+      tEra.textContent = c.getAttribute('data-era');
+      if(prev !== -1){
+        [].forEach.call(c.querySelectorAll('.kick, h3 span'), function(el){ decode(el, 750); });
+        if(!RM){ stage.classList.remove('flash'); void stage.offsetWidth; stage.classList.add('flash'); }
+      }
+    }
+
+    var mx = 0, my = 0, mxT = 0, myT = 0;
+    if(window.matchMedia('(pointer:fine)').matches){
+      stage.addEventListener('pointermove', function(e){ mxT = (e.clientX / window.innerWidth - .5) * 2; myT = (e.clientY / window.innerHeight - .5) * 2; });
+      stage.addEventListener('pointerleave', function(){ mxT = myT = 0; });
+    }
+
+    /* ---------- render loop ---------- */
+    var SX = new Float32Array(P), SY = new Float32Array(P), SZ = new Float32Array(P), SC = new Float32Array(P);
+    var pa = [0,0,0], pb = [0,0,0], sS = 0, first = true, running = false, raf = 0, lastSync = -1;
+    var TEAL = [63,224,201], AMBER = [255,194,71];
+
+    function drawEdges(f, alpha, list, col){
+      if(alpha < .02 || !list.length) return;
+      ctx.strokeStyle = col; ctx.globalAlpha = alpha; ctx.lineWidth = dpr * .8; ctx.beginPath();
+      for(var e = 0; e < list.length; e += 2){ var u = list[e], v = list[e+1]; ctx.moveTo(SX[u], SY[u]); ctx.lineTo(SX[v], SY[v]); }
+      ctx.stroke();
+    }
+    function drawSignals(f, alpha, t){
+      if(RM || alpha < .3 || !f.sig.length) return;
+      ctx.fillStyle = '#E8FFFB'; var s = 2.6 * dpr;
+      for(var j = 0; j < f.sig.length; j += 2){
+        var e = f.sig[j], u = f.edges[e], v = f.edges[e+1], tt = (t * .55 + f.sig[j+1]) % 1;
+        ctx.globalAlpha = alpha * Math.sin(Math.PI * tt);
+        ctx.fillRect(SX[u] + (SX[v] - SX[u]) * tt - s/2, SY[u] + (SY[v] - SY[u]) * tt - s/2, s, s);
+      }
+    }
+    function drawRings(t, m){
+      var pulse = Math.sin(Math.PI * m), r1 = Rp * 1.62 * (1 + .06 * pulse), r2 = Rp * 1.76;
+      ctx.lineWidth = dpr; ctx.globalAlpha = 1;
+      ctx.strokeStyle = 'rgba(63,224,201,' + (.2 + .25 * pulse) + ')';
+      for(var k = 0; k < 3; k++){ var a0 = t * .25 + k * 2.094; ctx.beginPath(); ctx.arc(cx, cy, r1, a0, a0 + .9); ctx.stroke(); }
+      ctx.strokeStyle = 'rgba(124,111,240,.22)'; ctx.beginPath();
+      for(var q = 0; q < 90; q++){
+        var ang = -t * .08 + q / 90 * 6.2832, l = (q % 10 === 0 ? 9 : 3) * dpr, cs = Math.cos(ang), sn = Math.sin(ang);
+        ctx.moveTo(cx + cs * r2, cy + sn * r2); ctx.lineTo(cx + cs * (r2 + l), cy + sn * (r2 + l));
+      }
+      ctx.stroke();
+    }
+
+    function frame(now){
+      raf = running ? requestAnimationFrame(frame) : 0;
+      var t = RM ? 0 : now / 1000;
+      var r = track.getBoundingClientRect(), L = Math.max(1, track.offsetHeight - window.innerHeight);
+      var p = Math.min(Math.max(-r.top / L, 0), 1);
+      var sT = Math.min(Math.max(p * (N - .4) - .2, 0), N - 1);
+      if(first || RM){ sS = sT; first = false; } else { sS += (sT - sS) * .1; if(Math.abs(sT - sS) < 1e-4) sS = sT; }
+      var a = Math.min(Math.floor(sS), N - 2), fr = sS - a;
+      var m = RM ? (fr < .6 ? 0 : 1) : smooth(.35, .85, fr);
+      setChapter(Math.min(N - 1, Math.floor(sS + .4)));
+      sbar.style.transform = 'scaleX(' + p + ')';
+      var sy = Math.round(p * 100); if(sy !== lastSync){ lastSync = sy; tSync.textContent = sy + '%'; }
+      hint.classList.toggle('gone', p > .02);
+      mx += (mxT - mx) * .05; my += (myT - my) * .05;
+
+      var FA = forms[a], FB = forms[a + 1];
+      var ra = FA.spin(t, sS), rb = FB.spin(t, sS);
+      ra.yaw += mx * .3; ra.pitch += my * .18; rb.yaw += mx * .3; rb.pitch += my * .18;
+      var RA = mk(ra), RB = mk(rb), W = cv.width, H = cv.height, D = 4.2;
+
+      // motion-trail fade
+      ctx.globalCompositeOperation = 'destination-out'; ctx.globalAlpha = 1;
+      ctx.fillStyle = 'rgba(0,0,0,' + (RM ? 1 : .5) + ')'; ctx.fillRect(0, 0, W, H);
+      ctx.globalCompositeOperation = 'source-over';
+      drawRings(t, m);
+      ctx.globalCompositeOperation = 'lighter';
+
+      for(var i = 0; i < P; i++){
+        getPos(FA, i, t, pa); rot(pa, RA);
+        getPos(FB, i, t, pb); rot(pb, RB);
+        var mi = (m - DL[i] * .35) / .65; mi = mi < 0 ? 0 : mi > 1 ? 1 : mi; mi = mi * mi * (3 - 2 * mi);
+        var b = RM ? 0 : Math.sin(Math.PI * mi) * .5 * BR[i], k = i * 3;
+        var x = pa[0] + (pb[0] - pa[0]) * mi + DR[k] * b,
+            y = pa[1] + (pb[1] - pa[1]) * mi + DR[k+1] * b,
+            z = pa[2] + (pb[2] - pa[2]) * mi + DR[k+2] * b;
+        var sc = D / (D - z);
+        SX[i] = cx + x * sc * Rp; SY[i] = cy - y * sc * Rp; SZ[i] = z; SC[i] = sc;
+      }
+
+      var wNet = (FA.amber ? 1 - m : 0) + (FB.amber ? m : 0);
+      drawEdges(FA, (1 - m) * FA.ea, FA.edges, '#3FE0C9');
+      drawEdges(FB, m * FB.ea, FB.edges, '#3FE0C9');
+      drawEdges(FA, (1 - m) * .55, FA.alt, FA.altCol || '#FFC247');
+      drawEdges(FB, m * .55, FB.alt, FB.altCol || '#FFC247');
+
+      var base = 1.5 * dpr;
+      function dots(list, col, boost){
+        ctx.fillStyle = col;
+        for(var j = 0; j < list.length; j++){
+          var q = list[j], d = (SZ[q] + 1.5) / 3; d = d < 0 ? 0 : d > 1 ? 1 : d;
+          ctx.globalAlpha = .22 + .6 * d;
+          var s = base * SC[q] * boost;
+          ctx.fillRect(SX[q] - s/2, SY[q] - s/2, s, s);
+        }
+      }
+      dots(G0, '#3FE0C9', 1);
+      dots(G1, '#8B7CFF', 1.05);
+      var cr = Math.round(TEAL[0] + (AMBER[0] - TEAL[0]) * wNet), cg = Math.round(TEAL[1] + (AMBER[1] - TEAL[1]) * wNet), cb = Math.round(TEAL[2] + (AMBER[2] - TEAL[2]) * wNet);
+      dots(G2, 'rgb(' + cr + ',' + cg + ',' + cb + ')', 1 + wNet * .8);
+
+      drawSignals(FA, 1 - m, t);
+      drawSignals(FB, m, t);
+      ctx.globalAlpha = 1; ctx.globalCompositeOperation = 'source-over';
+    }
+
+    if('IntersectionObserver' in window){
+      new IntersectionObserver(function(es){
+        running = es[0].isIntersecting;
+        if(running && !raf) raf = requestAnimationFrame(frame);
+      }, {rootMargin: '120px 0px'}).observe(track);
+    } else { running = true; raf = requestAnimationFrame(frame); }
   })();
 </script>
 </body>
