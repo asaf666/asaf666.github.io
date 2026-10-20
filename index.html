@@ -446,6 +446,35 @@ a.aq-status:focus-visible { outline: none; box-shadow: var(--focus-ring); }
   .det.edge-l .bubble { left: 0; transform: translate(0, 6px) scale(.9); } .det.edge-l .bubble.on { transform: translate(0, 0) scale(1); } .det.edge-l .bubble::after { left: 22px; }
   .det.edge-r .bubble { left: auto; right: 0; transform: translate(0, 6px) scale(.9); } .det.edge-r .bubble.on { transform: translate(0, 0) scale(1); } .det.edge-r .bubble::after { left: auto; right: 22px; }
 
+
+  /* cursors: a flashlight in the dark, a magnifying glass on paper (pointer devices only).
+     The clue badge and the plus lens mark anything clickable. Hotspots: beam tip 6,6; lens and badge centres 12,12 and 16,16. */
+  @media (pointer: fine) {
+    :root[data-theme="night"] { cursor: url("data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIzMiIgaGVpZ2h0PSIzMiIgdmlld0JveD0iMCAwIDMyIDMyIj4KPGcgdHJhbnNmb3JtPSJ0cmFuc2xhdGUoMTEgMTEpIHJvdGF0ZSg0NSkiPjxnIHN0cm9rZT0iI2ZmZDM2ZSIgc3Ryb2tlLXdpZHRoPSIxLjYiIHN0cm9rZS1saW5lY2FwPSJyb3VuZCI+PHBhdGggZD0iTS0yLjUgMCBILTYiLz48cGF0aCBkPSJNLTIgLTMuNCBMLTUgLTUuNiIvPjxwYXRoIGQ9Ik0tMiAzLjQgTC01IDUuNiIvPjwvZz4KPHBhdGggZD0iTTkgLTMuNiBIMjMgUTI1LjUgLTMuNiAyNS41IDAgUTI1LjUgMy42IDIzIDMuNiBIOSBaIiBmaWxsPSIjZDlkMmM0IiBzdHJva2U9IiMxYjE4MTQiIHN0cm9rZS13aWR0aD0iMS4zIiBzdHJva2UtbGluZWpvaW49InJvdW5kIi8+CjxwYXRoIGQ9Ik0xMSAtMy42IFYzLjYgTTIxIC0zLjYgVjMuNiIgc3Ryb2tlPSIjOWM5Mzg2IiBzdHJva2Utd2lkdGg9Ii44Ii8+CjxyZWN0IHg9IjEzLjUiIHk9Ii01IiB3aWR0aD0iMy42IiBoZWlnaHQ9IjEuNiIgcng9Ii42IiBmaWxsPSIjZmY1YTFmIiBzdHJva2U9IiMxYjE4MTQiIHN0cm9rZS13aWR0aD0iLjgiLz4KPHBhdGggZD0iTTAuNiAtNS40IEw5LjQgLTMuOCBMOS40IDMuOCBMMC42IDUuNCBaIiBmaWxsPSIjYzlhMjRhIiBzdHJva2U9IiMxYjE4MTQiIHN0cm9rZS13aWR0aD0iMS4zIiBzdHJva2UtbGluZWpvaW49InJvdW5kIi8+CjxlbGxpcHNlIGN4PSIwLjgiIGN5PSIwIiByeD0iMS41IiByeT0iNSIgZmlsbD0iI2ZmZjRjZiIgc3Ryb2tlPSIjMWIxODE0IiBzdHJva2Utd2lkdGg9IjEiLz4KPC9nPjwvc3ZnPg==") 6 6, url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAFCElEQVR4nMSWe0xTVxjAv9PHbenti5bePkSopVQeiqJG/EOTbbIQZxy6yeaUGZdFM6M4nUHdP9vi4pbFuWW6B26imzEzxIEZzjiXuEyKFJQ9BBw4fMKkBSpUSl/S9ngugjwEbKHEX3N7b+85J9/vfN/pPZcHTxkePGU4oXbEOIeLr2xKhQgTsgDUabIhyK3DtVuTIYKELoDh7sNzIAMiSBgCPfUPL9DkZ6C33jVbGsjxSf89NKugjbR0A8KTL4DQiQAJ9A8g2IFr8j4fMEPFvp5go5ZRvJxk0tfH65Q3FQqFFCYAGquxNzhCW8nlp2jm/nyNRqySiORmkzHe8NwzGfzCH4qh2+k+0dTS/gqMkzHXAEo7sI2cviA1WcUwsgQ5rajduX2d6ZeSL/kMI4c0Aw3+QDBHp45ZDePkUQZwY54AvCgbMKcaZt653VuGPnRKZZKCkZUdKditmjc3Faw2OyzNXg8fbzRCqdkGp8ps7oAvmNTS0dEMYTKQgfuQQr6LAAWvQ63Wi2vzrpFFeFCrlcfLYyTlRw/t6Q3e2nYXXnt9G+RmMRAtpWB1VizoVAKKJ+CUwBNKOqYASj3wN6n3fJLut8jPz8hxOYgDToVUfmb/vl3K9FlJcPPW//Diys2wOF0EC2fH9I7j8ziwc62JhwHm6DTKfAiTMY21jDJ3zaolhXs/2k7VXWmE3Dd2wauZKlg8T/lY31NmKxwpbQr4IZje2tpZCyEy5iKkxcIP5sxOpg59XwLr1r8LeTlTRgzOsmyRFpL1YsTncM9BGKXgjtVGCwQ7Ky/ViGncgrasnAKxTNSona81d8PJP6woiIGWiIQap8tzGiYogKNod0HgPm/KvzccszApcqpBgjicxyfXcMsJ7x28CvppBti44U1wODrnul2uOCJRSppl5PCNFiSkVOkYZSaPh4rUCqFkx1ojP04jGhL8/YMNYJqeCPnb8oAVvHbzNny4Zy/WC3AzzeXYz15vX0i6eiDMDDyCzOQG4lLf+v048VdLazKbhGS9BNXdcMLu765CSkoK5L+zmfyJEMROjQV9fBzIZFJkq/lLdiaD1p6+x1/r4QgOe71e37gyMBiNSrGS4nMKdaoosdXu5aTPToO8TRvYHaw3+GBKTp4C87HDcCSNguxLvtLKJvsKcjs4uE/o23EftvaOn7x+j6mlzd3gD2BYuuT5EYOzvLRiGWTkrIHl1T644ws0DQ/OElIJhuNy9bjudXu+npOW5DlvrsycPj0RxcdNHbHvjBkpIGI0UHahar5UTMudLvfZCQv0c7vZeoGHUNt5c8ULhmnxo0okGPTAMDFwwXJxwXCJCQmwkAVaLRFFPVEi0ZgAGo0KfD7vAmdXl5CMOxcRgX4JmhY6zpdVZOm0GsTOeDgOhwOEAgrEYglYqqoXSuioDjLuYkQEWLpdniopLewqr6jK0qrVkJAwbUhwu90ORqMRTIkJ5FnBgcs1dYul3e59ERNgITOqlIqEznLLxSy25olGw5Dg/WDyOfvb71yghAURFeiTsJD0+ioslzI1REIopIYEZ/nqm0KwWW2Nza32PREX6JMoNxrjBPX1/y1SqxmS9gGB40XFcPLn0zjg9y93ur1NkyLAYrPZz2F/T9BS9eezPB4PaDoKjh4rgh+PF2OEYVNLewf7BhX+ozhctGrF2wjQPrJPcPl8qsnn9eRa2zvN/e2TLsASHR0toyiYSt6U6oa3PQAAAP//DeSNsQAAAAZJREFUAwCHeuvaRAYZhwAAAABJRU5ErkJggg==") 6 6, auto; }
+    :root[data-theme="night"] :is(a, button, label, .det) { cursor: url("data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIzMiIgaGVpZ2h0PSIzMiIgdmlld0JveD0iMCAwIDMyIDMyIj4KPGNpcmNsZSBjeD0iMTYiIGN5PSIxNiIgcj0iMTMuNiIgZmlsbD0iI2ZmZjRjZiIgc3Ryb2tlPSIjZmY1YTFmIiBzdHJva2Utd2lkdGg9IjIuNCIvPgo8ZyB0cmFuc2Zvcm09InRyYW5zbGF0ZSg4LjIgNi42KSBzY2FsZSguNTIpIiBmaWxsPSJub25lIiBzdHJva2U9IiMxYjE4MTQiIHN0cm9rZS13aWR0aD0iMi42IiBzdHJva2UtbGluZWNhcD0icm91bmQiPjxwYXRoIGQ9Ik0xNSA2Yy01IDAtOSA0LTkgMTB2NiIvPjxwYXRoIGQ9Ik0xNSA5LjVjLTMuNCAwLTYgMi44LTYgNi44djgiLz48cGF0aCBkPSJNMTUgMTNjLTEuOCAwLTMgMS40LTMgMy42VjI3Ii8+PHBhdGggZD0iTTE1IDE2LjV2MTMiLz48cGF0aCBkPSJNMTggMTMuNGMxLjMuNiAyIDIgMiAzLjZ2MTAiLz48cGF0aCBkPSJNMjEgMTAuNGMyIDEuMiAzIDMuNCAzIDZ2Ni42Ii8+PHBhdGggZD0iTTE1IDZjMy44IDAgNyAyLjMgOC40IDUuNiIvPjwvZz4KPC9zdmc+Cg==") 16 16, url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAFVklEQVR4nMRXe1CVRRT/7X2APDSUEHldjDG1NJNQSSWfPWCUqFEEZHKmaZxSJ0vNGtOaNHVy8jXUjCEzOMYAdzAmIyOckR4KY5pSohlQRgLykNdVQBDuvdv59rsPrtzvchWdfn98u9/u2XN+e3b37FkN/mdo7kaYJ4aOglodC8afoN8gMDZa7uDX6dtAlXIY+XF2pK7NXZ3MHSGerFsIFXaS+Ax35MFxGtz0PtPX/TSYqEsCPHHsGGj5PqomO3RETAD8AwA/f/nf0Aq0NAHVf92pQg91z1ssq+k67pYAXx4yH1ydR25+WDQEBgMLFgHTZgPD/ZwP6jAAZ08BP3wHNDdaFKEJ3JzI9LWn3CbAk8PX0Dp/RsYZvH2B1Ndlw0wFt8DNMpHcg8CtLrmBYzXLrUkflABP1S2GGQXC+Ehy8YbtwOgg3BMaaoG9HwI32qWNymlScSyn9rgiAXL7VEBdSs3e8PEBttDy+4/GkNBKe2P7eqBLeKILzDyTZdddtHY7+pRrcoVxydWrNg3duAT/QFkXk+bKfGBWH+7fbSNAR20p+WOi+FmcCIyfrKiz7LfLWLV2ByZMiUfE43FYsnw9MjK/Qnd3t/MBkq64pXKdIZInh704gABUbLUoHxoJxC5RNH4gIw8Jy95GS1s7op6ahKjISbhQXoWtO9ORmLoRHR1dzgfGkU7fEVZbaxwIiAjH+RzRMp+OmtbDqY7TZ8qxa08mXopfgHPn/8DJkvMYNy4Ml87lI2HRPPxeXom9aVnOCXgOk3ULg1jIU0eNsBGAhiXQGqlFPXoOlPDB1s8R+9xsfF1QDJ0uCFveW4nVK5PQfasHyctixTIfyjqqOB5Rs+RSssWHx9sJQDVNFCHhihuvoaEZFVXV6DUa4evrjbkxUdi+KwPZ+kJEzkpCPfVv20LhQ6WC2Wx2TiA4DBgTYvECFzYtlxEPFCcyNBxKqPr7qig7bnQi5umpyDx8FBvXvYoFc6fBw0OLdzfvx4ljX6Cvtw+X/7yCyZMeda4oZCzQeE1yQ2A/D0CetsLaS2hpNYiyk9ytJYMSvi86iU/2HELKsjiYTCa0GzpE+5XqWkU90GqttUC7BxhtCwl9vXAHUlCTEBAwEl7ew+CpldV099wWpcnElQcTUQtUdgKgC0PCTQMeOKw2GBptLGhOMoFryq6LnDIRK1LjMRi8vIbBx9tLWaD2H2utwU6Ao0xmR5dGvXMSERGh2Ll1LcbqghEcFAAlFBcexPPPznTeWVdtuR0lm7zMTgCmb20LW3EBrnAgbTMWxT4j6ozJd5lKLYcQjUYNXViQrX0AKsqtxjlUnQU2Aiy3voW+Z0Xnz0WA2QRXkI5YXvZuCm6e4t/Pbzjyc/YgaupjyoNMfcCPhda/UpbddlOQtglw8z6KIno01MmCC5XX29PTA7OinyRv2i+f6BlT4BLFpLNZ3mrkon3WZsd8ICX8F2qJFvFg0y4KTI/gvuBfyhU/3Ww55ryU5dTEWLsc8wEjUuhrEIL7t8nJxFAhJatpH8vGOW+D2ZjSv9uBADtytVq6G0UOJ52IHe/YN869oPIS6dhA4VNabilRRALTOx4z50lpiu5NWqc0W8MLL1OSkiRfqe7gdg/wTQ5woqCfUv6GW0mpnUQYuYp9SUTkjSolKlJSMT3GdVr+awlwLM8ya2HYSMnoK5SM6p0Ncf0wSQ6dB6ZOJ6nxDh3Wh4mUNZspfBjoJdZKb4/qqjsUgBr4azTzEiUbgz7N+Ee0TyrDksgT60h8OtwBxxma+W7oa/IZwF2JuvU2tOldEeIPoyaWlEsZ68DHKWcX6bYruu+P0weJ/wAAAP//lMttYQAAAAZJREFUAwD7LNCrFm76MwAAAABJRU5ErkJggg==") 16 16, pointer; }
+    :root[data-theme="paper"] { cursor: url("data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIzMiIgaGVpZ2h0PSIzMiIgdmlld0JveD0iMCAwIDMyIDMyIj4KPHBhdGggZD0iTTE4LjYgMTguNiBMMjguNCAyOC40IiBzdHJva2U9IiNmZmZmZmYiIHN0cm9rZS13aWR0aD0iNyIgc3Ryb2tlLWxpbmVjYXA9InJvdW5kIi8+CjxjaXJjbGUgY3g9IjEyIiBjeT0iMTIiIHI9IjguNiIgZmlsbD0ibm9uZSIgc3Ryb2tlPSIjZmZmZmZmIiBzdHJva2Utd2lkdGg9IjUuNCIvPgo8cGF0aCBkPSJNMTguNiAxOC42IEwyOC40IDI4LjQiIHN0cm9rZT0iIzVhM2UyYiIgc3Ryb2tlLXdpZHRoPSI0IiBzdHJva2UtbGluZWNhcD0icm91bmQiLz4KPHBhdGggZD0iTTE4LjIgMTguMiBMMjAuNiAyMC42IiBzdHJva2U9IiNjOWEyNGEiIHN0cm9rZS13aWR0aD0iNC40IiBzdHJva2UtbGluZWNhcD0iYnV0dCIvPgo8Y2lyY2xlIGN4PSIxMiIgY3k9IjEyIiByPSI4LjYiIGZpbGw9IiNkY2VjZjciIGZpbGwtb3BhY2l0eT0iLjU1IiBzdHJva2U9IiMxYjE4MTQiIHN0cm9rZS13aWR0aD0iMi40Ii8+CjxwYXRoIGQ9Ik03LjQgOS42IFE4LjYgNi44IDExLjYgNi40IiBmaWxsPSJub25lIiBzdHJva2U9IiNmZmZmZmYiIHN0cm9rZS13aWR0aD0iMS41IiBzdHJva2UtbGluZWNhcD0icm91bmQiLz4KPC9zdmc+") 12 12, url("data:image/png;base64,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") 12 12, auto; }
+    :root[data-theme="paper"] :is(a, button, label, .det) { cursor: url("data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIzMiIgaGVpZ2h0PSIzMiIgdmlld0JveD0iMCAwIDMyIDMyIj4KPHBhdGggZD0iTTE4LjYgMTguNiBMMjguNCAyOC40IiBzdHJva2U9IiNmZmZmZmYiIHN0cm9rZS13aWR0aD0iNyIgc3Ryb2tlLWxpbmVjYXA9InJvdW5kIi8+CjxjaXJjbGUgY3g9IjEyIiBjeT0iMTIiIHI9IjguNiIgZmlsbD0ibm9uZSIgc3Ryb2tlPSIjZmZmZmZmIiBzdHJva2Utd2lkdGg9IjUuNCIvPgo8cGF0aCBkPSJNMTguNiAxOC42IEwyOC40IDI4LjQiIHN0cm9rZT0iIzVhM2UyYiIgc3Ryb2tlLXdpZHRoPSI0IiBzdHJva2UtbGluZWNhcD0icm91bmQiLz4KPHBhdGggZD0iTTE4LjIgMTguMiBMMjAuNiAyMC42IiBzdHJva2U9IiNjOWEyNGEiIHN0cm9rZS13aWR0aD0iNC40IiBzdHJva2UtbGluZWNhcD0iYnV0dCIvPgo8Y2lyY2xlIGN4PSIxMiIgY3k9IjEyIiByPSI4LjYiIGZpbGw9IiNmYmUzZDciIGZpbGwtb3BhY2l0eT0iLjU1IiBzdHJva2U9IiMxYjE4MTQiIHN0cm9rZS13aWR0aD0iMi40Ii8+CjxwYXRoIGQ9Ik03LjQgOS42IFE4LjYgNi44IDExLjYgNi40IiBmaWxsPSJub25lIiBzdHJva2U9IiNmZmZmZmYiIHN0cm9rZS13aWR0aD0iMS41IiBzdHJva2UtbGluZWNhcD0icm91bmQiLz48cGF0aCBkPSJNMTIgOC4yIFYxNS44IE04LjIgMTIgSDE1LjgiIHN0cm9rZT0iI2U4NTAxYSIgc3Ryb2tlLXdpZHRoPSIyIiBzdHJva2UtbGluZWNhcD0icm91bmQiLz4KPC9zdmc+") 12 12, url("data:image/png;base64,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") 12 12, pointer; }
+  }
+
+  /* ================= the flashlight (Night, pointer devices) =================
+     The flashlight is the pointer: the front of its lens is the click point. A soft cone of warm light shines out
+     of the lens up-left (a radial pool cut by a feathered conic wedge); moving brightens it a touch.
+     Over anything clickable the flashlight turns into a clue badge (a fingerprint), centred on the click point. */
+  .torch-on[data-theme="night"], .torch-on[data-theme="night"] * { cursor: none !important; }
+  .torch-on[data-theme="night"] .lamp { display: none; }
+  .torch-fx { position: fixed; inset: 0; z-index: 45; pointer-events: none; opacity: 0; transition: opacity .25s ease; }
+  .torch-on[data-theme="night"] .torch-fx.live { opacity: 1; }
+  .torch-fx > * { position: absolute; left: 0; top: 0; will-change: transform, opacity; }
+  .torch-cone { width: 520px; height: 520px; margin: -260px 0 0 -260px; mix-blend-mode: screen; opacity: 0; --dir: 315deg;
+    background: radial-gradient(circle closest-side, rgba(255, 238, 196, .06) 0, rgba(255, 236, 190, .26) 24%, rgba(255, 230, 178, .24) 52%, rgba(255, 218, 156, .09) 78%, rgba(255, 214, 150, 0) 100%);
+    -webkit-mask-image: conic-gradient(from calc(var(--dir) - 30deg), transparent 0deg, #000 14deg, #000 46deg, transparent 60deg);
+            mask-image: conic-gradient(from calc(var(--dir) - 30deg), transparent 0deg, #000 14deg, #000 46deg, transparent 60deg); }
+  .torch { width: 48px; height: 20px; margin: -10px 0 0 -46.4px; transform-origin: 46.4px 10px; filter: drop-shadow(0 2px 3px rgba(0, 0, 0, .6)); transition: opacity .12s ease; }
+  .torch svg { display: block; width: 48px; height: 20px; overflow: visible; }
+  .torch-clue { width: 0; height: 0; }
+  .torch-clue svg { position: absolute; left: -17px; top: -17px; width: 34px; height: 34px; opacity: 0; transform: scale(.3) rotate(-20deg); transition: transform .28s var(--ease-snap), opacity .14s ease; filter: drop-shadow(0 0 7px rgba(255, 90, 31, .6)); }
+  .torch-fx.hot .torch { opacity: 0; }
+  .torch-fx.hot .torch-clue svg { opacity: 1; transform: none; }
   @media (max-width: 1080px) { .files { grid-template-columns: repeat(2, 1fr); } }
   @media (max-width: 760px) {
     .mast__top { grid-template-columns: 1fr auto; }
@@ -577,6 +606,21 @@ a.aq-status:focus-visible { outline: none; box-shadow: var(--focus-ring); }
 </div>
 
 <footer class="mock-foot"><div class="aq-wrap mock-foot__row"><span class="aq-label">© 2026 Asaf Sade · Senior QA Engineer</span><nav class="mock-foot__nav" aria-label="Footer"><a href="mailto:sadeasaf@gmail.com">Email</a><a href="https://www.linkedin.com/in/asaf666/" target="_blank" rel="noopener">LinkedIn</a><a href="https://github.com/asaf666" target="_blank" rel="noopener">GitHub</a><a href="#top">Back to top ↑</a></nav></div></footer>
+
+<div class="torch-fx" aria-hidden="true">
+  <div class="torch-cone"></div>
+  <div class="torch"><svg viewBox="0 0 48 20" width="48" height="20">
+    <rect x="2" y="6" width="31" height="8" rx="3.2" fill="#d9d2c4" stroke="#1b1814" stroke-width="1.3"/>
+    <path d="M7 6v8M27 6v8" stroke="#9c9386" stroke-width=".9"/>
+    <rect x="14" y="4.4" width="5" height="1.8" rx=".7" fill="#ff5a1f" stroke="#1b1814" stroke-width=".8"/>
+    <path d="M32.6 5.6 L44 3.2 L44 16.8 L32.6 14.4 Z" fill="#c9a24a" stroke="#1b1814" stroke-width="1.3" stroke-linejoin="round"/>
+    <ellipse cx="44.4" cy="10" rx="1.9" ry="6.6" fill="#fff4cf" stroke="#1b1814" stroke-width="1"/>
+  </svg></div>
+  <div class="torch-clue"><svg viewBox="0 0 32 32" width="34" height="34">
+    <circle cx="16" cy="16" r="13.6" fill="#fff4cf" stroke="#ff5a1f" stroke-width="2.4"/>
+    <g transform="translate(8.2 6.6) scale(.52)" fill="none" stroke="#1b1814" stroke-width="2.6" stroke-linecap="round"><path d="M15 6c-5 0-9 4-9 10v6"/><path d="M15 9.5c-3.4 0-6 2.8-6 6.8v8"/><path d="M15 13c-1.8 0-3 1.4-3 3.6V27"/><path d="M15 16.5v13"/><path d="M18 13.4c1.3.6 2 2 2 3.6v10"/><path d="M21 10.4c2 1.2 3 3.4 3 6v6.6"/><path d="M15 6c3.8 0 7 2.3 8.4 5.6"/></g>
+  </svg></div>
+</div>
 
 <div class="det" id="det" data-pose="idle" aria-hidden="true">
   <div class="bubble" id="bubble"></div>
@@ -919,6 +963,42 @@ a.aq-status:focus-visible { outline: none; box-shadow: var(--focus-ring); }
   window.addEventListener('resize', function () { if (RM && on) { pos.y = innerHeight - 10; place(); } });
   tog.setAttribute('aria-pressed', on);
   if (on) setTimeout(start, 1600); else det.hidden = true;
+})();
+
+/* ---------- the flashlight: Night theme, mouse only, not under reduced motion ---------- */
+(function () {
+  if (!window.matchMedia || matchMedia('(prefers-reduced-motion: reduce)').matches || !matchMedia('(pointer: fine)').matches) return;
+  var root = document.documentElement, fx = document.querySelector('.torch-fx');
+  if (!fx) return;
+  var cone = fx.querySelector('.torch-cone'), torch = fx.querySelector('.torch'), clue = fx.querySelector('.torch-clue');
+  var P = { x: 0, y: 0 }, seen = false, lastMove = 0, vis = 0, hot = false, raf = 0, last = 0;
+  root.classList.add('torch-on');
+  function night() { return root.getAttribute('data-theme') === 'night'; }
+  function place() {
+    var t = 'translate3d(' + P.x + 'px,' + P.y + 'px,0)';
+    torch.style.transform = t + ' rotate(-135deg)'; clue.style.transform = t;
+    cone.style.transform = t + ' scale(' + (.9 + .1 * vis).toFixed(3) + ')';
+  }
+  function kick() { if (!raf && night() && seen) { last = 0; raf = requestAnimationFrame(loop); } }
+  window.addEventListener('pointermove', function (e) {
+    if (e.pointerType && e.pointerType !== 'mouse') return;
+    P.x = e.clientX; P.y = e.clientY; seen = true; lastMove = performance.now();
+    fx.classList.add('live');
+    var h = !!(e.target && e.target.closest && e.target.closest('a, button, label, .det'));
+    if (h !== hot) { hot = h; fx.classList.toggle('hot', hot); }
+    place(); kick();
+  }, { passive: true });
+  document.documentElement.addEventListener('mouseleave', function () { fx.classList.remove('live'); });
+  function loop(t) {
+    var dt = Math.min(.05, (t - (last || t)) / 1000); last = t;
+    var idle = performance.now() - lastMove;
+    var target = hot ? 0 : (idle < 140 ? 1 : .72);       // on while lit, a little brighter while moving, off over a clue
+    vis += (target - vis) * (1 - Math.exp(-dt * (target > vis ? 12 : (hot ? 16 : 3))));
+    cone.style.opacity = vis.toFixed(3); place();
+    raf = (night() && Math.abs(target - vis) > .004) ? requestAnimationFrame(loop) : 0;
+  }
+  new MutationObserver(function () { if (night()) kick(); else fx.classList.remove('live'); })
+    .observe(root, { attributes: true, attributeFilter: ['data-theme'] });
 })();
 </script>
 </body>
